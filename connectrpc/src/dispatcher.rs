@@ -451,7 +451,7 @@ pub mod codegen {
     ) -> crate::ServiceStream<crate::StreamMessage<M>>
     where
         M: crate::HasMessageView + JsonDeserialize + 'static,
-        M::View<'static>: 'static,
+        M::View<'static>: buffa::ViewLifetimeParametric + 'static,
     {
         Box::pin(requests.map(move |r| {
             r.and_then(|raw| {

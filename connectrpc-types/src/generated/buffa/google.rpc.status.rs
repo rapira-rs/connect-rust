@@ -195,15 +195,15 @@ impl ::buffa::ExtensionSet for Status {
 }
 #[cfg(feature = "json")]
 impl ::buffa::json_helpers::ProtoElemJson for Status {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }

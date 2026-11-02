@@ -293,9 +293,9 @@ impl<'a> ::buffa::ViewEncode<'a> for UnaryResponseDefinitionView<'a> {
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.raw_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_response.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.raw_response.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -352,13 +352,13 @@ impl<'a> ::buffa::ViewEncode<'a> for UnaryResponseDefinitionView<'a> {
             );
             v.write_to(__cache, buf);
         }
-        if self.raw_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_response.as_option() {
             ::buffa::types::put_len_delimited_header(
                 5u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.raw_response.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if self.response_delay_ms != 0u32 {
             ::buffa::types::put_uint32_field(6u32, self.response_delay_ms, buf);
@@ -431,6 +431,7 @@ impl<'a> ::buffa::MessageName for UnaryResponseDefinitionView<'a> {
 }
 ::buffa::impl_default_view_instance!(UnaryResponseDefinitionView);
 ::buffa::impl_view_reborrow!(UnaryResponseDefinitionView);
+::buffa::unsafe_impl_view_lifetime_parametric!(UnaryResponseDefinitionView);
 /** Self-contained, `'static` owned view of a `UnaryResponseDefinition` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`UnaryResponseDefinitionView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -852,9 +853,9 @@ impl<'a> ::buffa::ViewEncode<'a> for StreamResponseDefinitionView<'a> {
                 += 1u64
                     + ::buffa::types::uint32_encoded_len(self.response_delay_ms) as u64;
         }
-        if self.error.is_set() {
+        if let ::core::option::Option::Some(__v) = self.error.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.error.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -868,9 +869,9 @@ impl<'a> ::buffa::ViewEncode<'a> for StreamResponseDefinitionView<'a> {
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.raw_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_response.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.raw_response.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -901,13 +902,13 @@ impl<'a> ::buffa::ViewEncode<'a> for StreamResponseDefinitionView<'a> {
         if self.response_delay_ms != 0u32 {
             ::buffa::types::put_uint32_field(3u32, self.response_delay_ms, buf);
         }
-        if self.error.is_set() {
+        if let ::core::option::Option::Some(__v) = self.error.as_option() {
             ::buffa::types::put_len_delimited_header(
                 4u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.error.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.response_trailers {
             ::buffa::types::put_len_delimited_header(
@@ -917,13 +918,13 @@ impl<'a> ::buffa::ViewEncode<'a> for StreamResponseDefinitionView<'a> {
             );
             v.write_to(__cache, buf);
         }
-        if self.raw_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_response.as_option() {
             ::buffa::types::put_len_delimited_header(
                 6u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.raw_response.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -987,6 +988,7 @@ impl<'a> ::buffa::MessageName for StreamResponseDefinitionView<'a> {
 }
 ::buffa::impl_default_view_instance!(StreamResponseDefinitionView);
 ::buffa::impl_view_reborrow!(StreamResponseDefinitionView);
+::buffa::unsafe_impl_view_lifetime_parametric!(StreamResponseDefinitionView);
 /** Self-contained, `'static` owned view of a `StreamResponseDefinition` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`StreamResponseDefinitionView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1277,9 +1279,9 @@ impl<'a> ::buffa::ViewEncode<'a> for UnaryRequestView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.response_definition.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1299,13 +1301,13 @@ impl<'a> ::buffa::ViewEncode<'a> for UnaryRequestView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.response_definition.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if !self.request_data.is_empty() {
             ::buffa::types::put_shared_bytes_field(2u32, &self.request_data, buf);
@@ -1357,6 +1359,7 @@ impl<'a> ::buffa::MessageName for UnaryRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(UnaryRequestView);
 ::buffa::impl_view_reborrow!(UnaryRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(UnaryRequestView);
 /** Self-contained, `'static` owned view of a `UnaryRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`UnaryRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1589,9 +1592,9 @@ impl<'a> ::buffa::ViewEncode<'a> for UnaryResponseView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.payload.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1608,13 +1611,13 @@ impl<'a> ::buffa::ViewEncode<'a> for UnaryResponseView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.payload.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -1653,6 +1656,7 @@ impl<'a> ::buffa::MessageName for UnaryResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(UnaryResponseView);
 ::buffa::impl_view_reborrow!(UnaryResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(UnaryResponseView);
 /** Self-contained, `'static` owned view of a `UnaryResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`UnaryResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1896,9 +1900,9 @@ impl<'a> ::buffa::ViewEncode<'a> for IdempotentUnaryRequestView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.response_definition.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1918,13 +1922,13 @@ impl<'a> ::buffa::ViewEncode<'a> for IdempotentUnaryRequestView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.response_definition.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if !self.request_data.is_empty() {
             ::buffa::types::put_shared_bytes_field(2u32, &self.request_data, buf);
@@ -1976,6 +1980,7 @@ impl<'a> ::buffa::MessageName for IdempotentUnaryRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(IdempotentUnaryRequestView);
 ::buffa::impl_view_reborrow!(IdempotentUnaryRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(IdempotentUnaryRequestView);
 /** Self-contained, `'static` owned view of a `IdempotentUnaryRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`IdempotentUnaryRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2218,9 +2223,9 @@ impl<'a> ::buffa::ViewEncode<'a> for IdempotentUnaryResponseView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.payload.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2237,13 +2242,13 @@ impl<'a> ::buffa::ViewEncode<'a> for IdempotentUnaryResponseView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.payload.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -2282,6 +2287,7 @@ impl<'a> ::buffa::MessageName for IdempotentUnaryResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(IdempotentUnaryResponseView);
 ::buffa::impl_view_reborrow!(IdempotentUnaryResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(IdempotentUnaryResponseView);
 /** Self-contained, `'static` owned view of a `IdempotentUnaryResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`IdempotentUnaryResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2529,9 +2535,9 @@ impl<'a> ::buffa::ViewEncode<'a> for ServerStreamRequestView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.response_definition.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2551,13 +2557,13 @@ impl<'a> ::buffa::ViewEncode<'a> for ServerStreamRequestView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.response_definition.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if !self.request_data.is_empty() {
             ::buffa::types::put_shared_bytes_field(2u32, &self.request_data, buf);
@@ -2609,6 +2615,7 @@ impl<'a> ::buffa::MessageName for ServerStreamRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(ServerStreamRequestView);
 ::buffa::impl_view_reborrow!(ServerStreamRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ServerStreamRequestView);
 /** Self-contained, `'static` owned view of a `ServerStreamRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ServerStreamRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2851,9 +2858,9 @@ impl<'a> ::buffa::ViewEncode<'a> for ServerStreamResponseView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.payload.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2870,13 +2877,13 @@ impl<'a> ::buffa::ViewEncode<'a> for ServerStreamResponseView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.payload.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -2915,6 +2922,7 @@ impl<'a> ::buffa::MessageName for ServerStreamResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ServerStreamResponseView);
 ::buffa::impl_view_reborrow!(ServerStreamResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ServerStreamResponseView);
 /** Self-contained, `'static` owned view of a `ServerStreamResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ServerStreamResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -3165,9 +3173,9 @@ impl<'a> ::buffa::ViewEncode<'a> for ClientStreamRequestView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.response_definition.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -3187,13 +3195,13 @@ impl<'a> ::buffa::ViewEncode<'a> for ClientStreamRequestView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.response_definition.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if !self.request_data.is_empty() {
             ::buffa::types::put_shared_bytes_field(2u32, &self.request_data, buf);
@@ -3245,6 +3253,7 @@ impl<'a> ::buffa::MessageName for ClientStreamRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(ClientStreamRequestView);
 ::buffa::impl_view_reborrow!(ClientStreamRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ClientStreamRequestView);
 /** Self-contained, `'static` owned view of a `ClientStreamRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ClientStreamRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -3490,9 +3499,9 @@ impl<'a> ::buffa::ViewEncode<'a> for ClientStreamResponseView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.payload.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -3509,13 +3518,13 @@ impl<'a> ::buffa::ViewEncode<'a> for ClientStreamResponseView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.payload.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -3554,6 +3563,7 @@ impl<'a> ::buffa::MessageName for ClientStreamResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ClientStreamResponseView);
 ::buffa::impl_view_reborrow!(ClientStreamResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ClientStreamResponseView);
 /** Self-contained, `'static` owned view of a `ClientStreamResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ClientStreamResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -3821,9 +3831,9 @@ impl<'a> ::buffa::ViewEncode<'a> for BidiStreamRequestView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.response_definition.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -3846,13 +3856,13 @@ impl<'a> ::buffa::ViewEncode<'a> for BidiStreamRequestView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.response_definition.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if self.full_duplex {
             ::buffa::types::put_bool_field(2u32, self.full_duplex, buf);
@@ -3910,6 +3920,7 @@ impl<'a> ::buffa::MessageName for BidiStreamRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(BidiStreamRequestView);
 ::buffa::impl_view_reborrow!(BidiStreamRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(BidiStreamRequestView);
 /** Self-contained, `'static` owned view of a `BidiStreamRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`BidiStreamRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -4167,9 +4178,9 @@ impl<'a> ::buffa::ViewEncode<'a> for BidiStreamResponseView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.payload.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -4186,13 +4197,13 @@ impl<'a> ::buffa::ViewEncode<'a> for BidiStreamResponseView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.payload.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -4231,6 +4242,7 @@ impl<'a> ::buffa::MessageName for BidiStreamResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(BidiStreamResponseView);
 ::buffa::impl_view_reborrow!(BidiStreamResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(BidiStreamResponseView);
 /** Self-contained, `'static` owned view of a `BidiStreamResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`BidiStreamResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -4473,6 +4485,7 @@ impl<'a> ::buffa::MessageName for UnimplementedRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(UnimplementedRequestView);
 ::buffa::impl_view_reborrow!(UnimplementedRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(UnimplementedRequestView);
 /** Self-contained, `'static` owned view of a `UnimplementedRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`UnimplementedRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -4704,6 +4717,7 @@ impl<'a> ::buffa::MessageName for UnimplementedResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(UnimplementedResponseView);
 ::buffa::impl_view_reborrow!(UnimplementedResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(UnimplementedResponseView);
 /** Self-contained, `'static` owned view of a `UnimplementedResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`UnimplementedResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -4938,9 +4952,9 @@ impl<'a> ::buffa::ViewEncode<'a> for ConformancePayloadView<'a> {
         if !self.data.is_empty() {
             size += 1u64 + ::buffa::types::bytes_encoded_len(&self.data) as u64;
         }
-        if self.request_info.is_set() {
+        if let ::core::option::Option::Some(__v) = self.request_info.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.request_info.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -4960,13 +4974,13 @@ impl<'a> ::buffa::ViewEncode<'a> for ConformancePayloadView<'a> {
         if !self.data.is_empty() {
             ::buffa::types::put_shared_bytes_field(1u32, &self.data, buf);
         }
-        if self.request_info.is_set() {
+        if let ::core::option::Option::Some(__v) = self.request_info.as_option() {
             ::buffa::types::put_len_delimited_header(
                 2u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.request_info.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -5008,6 +5022,7 @@ impl<'a> ::buffa::MessageName for ConformancePayloadView<'a> {
 }
 ::buffa::impl_default_view_instance!(ConformancePayloadView);
 ::buffa::impl_view_reborrow!(ConformancePayloadView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ConformancePayloadView);
 /** Self-contained, `'static` owned view of a `ConformancePayload` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ConformancePayloadView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -5371,9 +5386,10 @@ pub mod conformance_payload {
                     += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                         + inner_size as u64;
             }
-            if self.connect_get_info.is_set() {
+            if let ::core::option::Option::Some(__v) = self.connect_get_info.as_option()
+            {
                 let __slot = __cache.reserve();
-                let inner_size = self.connect_get_info.compute_size(__cache);
+                let inner_size = __v.compute_size(__cache);
                 __cache.set(__slot, inner_size);
                 size
                     += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -5409,13 +5425,14 @@ pub mod conformance_payload {
                 );
                 v.write_to(__cache, buf);
             }
-            if self.connect_get_info.is_set() {
+            if let ::core::option::Option::Some(__v) = self.connect_get_info.as_option()
+            {
                 ::buffa::types::put_len_delimited_header(
                     4u32,
                     u64::from(__cache.consume_next()),
                     buf,
                 );
-                self.connect_get_info.write_to(__cache, buf);
+                __v.write_to(__cache, buf);
             }
             self.__buffa_unknown_fields.write_to(buf);
         }
@@ -5470,6 +5487,7 @@ pub mod conformance_payload {
     }
     ::buffa::impl_default_view_instance!(RequestInfoView);
     ::buffa::impl_view_reborrow!(RequestInfoView);
+    ::buffa::unsafe_impl_view_lifetime_parametric!(RequestInfoView);
     /** Self-contained, `'static` owned view of a `RequestInfo` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`RequestInfoView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -5811,6 +5829,7 @@ pub mod conformance_payload {
     }
     ::buffa::impl_default_view_instance!(ConnectGetInfoView);
     ::buffa::impl_view_reborrow!(ConnectGetInfoView);
+    ::buffa::unsafe_impl_view_lifetime_parametric!(ConnectGetInfoView);
     /** Self-contained, `'static` owned view of a `ConnectGetInfo` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ConnectGetInfoView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -6157,6 +6176,7 @@ impl<'a> ::buffa::MessageName for ErrorView<'a> {
 }
 ::buffa::impl_default_view_instance!(ErrorView);
 ::buffa::impl_view_reborrow!(ErrorView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ErrorView);
 /** Self-contained, `'static` owned view of a `Error` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ErrorView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -6451,6 +6471,7 @@ impl<'a> ::buffa::MessageName for HeaderView<'a> {
 }
 ::buffa::impl_default_view_instance!(HeaderView);
 ::buffa::impl_view_reborrow!(HeaderView);
+::buffa::unsafe_impl_view_lifetime_parametric!(HeaderView);
 /** Self-contained, `'static` owned view of a `Header` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`HeaderView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -7023,6 +7044,7 @@ impl<'a> ::buffa::MessageName for RawHTTPRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(RawHTTPRequestView);
 ::buffa::impl_view_reborrow!(RawHTTPRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(RawHTTPRequestView);
 /** Self-contained, `'static` owned view of a `RawHTTPRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`RawHTTPRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -7337,9 +7359,9 @@ pub mod raw_http_request {
             if !self.name.is_empty() {
                 size += 1u64 + ::buffa::types::string_encoded_len(&self.name) as u64;
             }
-            if self.value.is_set() {
+            if let ::core::option::Option::Some(__v) = self.value.as_option() {
                 let __slot = __cache.reserve();
-                let inner_size = self.value.compute_size(__cache);
+                let inner_size = __v.compute_size(__cache);
                 __cache.set(__slot, inner_size);
                 size
                     += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -7362,13 +7384,13 @@ pub mod raw_http_request {
             if !self.name.is_empty() {
                 ::buffa::types::put_string_field(1u32, &self.name, buf);
             }
-            if self.value.is_set() {
+            if let ::core::option::Option::Some(__v) = self.value.as_option() {
                 ::buffa::types::put_len_delimited_header(
                     2u32,
                     u64::from(__cache.consume_next()),
                     buf,
                 );
-                self.value.write_to(__cache, buf);
+                __v.write_to(__cache, buf);
             }
             if self.base64_encode {
                 ::buffa::types::put_bool_field(3u32, self.base64_encode, buf);
@@ -7416,6 +7438,7 @@ pub mod raw_http_request {
     }
     ::buffa::impl_default_view_instance!(EncodedQueryParamView);
     ::buffa::impl_view_reborrow!(EncodedQueryParamView);
+    ::buffa::unsafe_impl_view_lifetime_parametric!(EncodedQueryParamView);
     /** Self-contained, `'static` owned view of a `EncodedQueryParam` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`EncodedQueryParamView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -7855,6 +7878,7 @@ impl<'a> ::buffa::MessageName for MessageContentsView<'a> {
 }
 ::buffa::impl_default_view_instance!(MessageContentsView);
 ::buffa::impl_view_reborrow!(MessageContentsView);
+::buffa::unsafe_impl_view_lifetime_parametric!(MessageContentsView);
 /** Self-contained, `'static` owned view of a `MessageContents` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`MessageContentsView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -8147,6 +8171,7 @@ impl<'a> ::buffa::MessageName for StreamContentsView<'a> {
 }
 ::buffa::impl_default_view_instance!(StreamContentsView);
 ::buffa::impl_view_reborrow!(StreamContentsView);
+::buffa::unsafe_impl_view_lifetime_parametric!(StreamContentsView);
 /** Self-contained, `'static` owned view of a `StreamContents` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`StreamContentsView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -8418,9 +8443,9 @@ pub mod stream_contents {
             if let Some(v) = self.length {
                 size += 1u64 + ::buffa::types::uint32_encoded_len(v) as u64;
             }
-            if self.payload.is_set() {
+            if let ::core::option::Option::Some(__v) = self.payload.as_option() {
                 let __slot = __cache.reserve();
-                let inner_size = self.payload.compute_size(__cache);
+                let inner_size = __v.compute_size(__cache);
                 __cache.set(__slot, inner_size);
                 size
                     += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -8443,13 +8468,13 @@ pub mod stream_contents {
             if let Some(v) = self.length {
                 ::buffa::types::put_uint32_field(2u32, v, buf);
             }
-            if self.payload.is_set() {
+            if let ::core::option::Option::Some(__v) = self.payload.as_option() {
                 ::buffa::types::put_len_delimited_header(
                     3u32,
                     u64::from(__cache.consume_next()),
                     buf,
                 );
-                self.payload.write_to(__cache, buf);
+                __v.write_to(__cache, buf);
             }
             self.__buffa_unknown_fields.write_to(buf);
         }
@@ -8499,6 +8524,7 @@ pub mod stream_contents {
     }
     ::buffa::impl_default_view_instance!(StreamItemView);
     ::buffa::impl_view_reborrow!(StreamItemView);
+    ::buffa::unsafe_impl_view_lifetime_parametric!(StreamItemView);
     /** Self-contained, `'static` owned view of a `StreamItem` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`StreamItemView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -9022,6 +9048,7 @@ impl<'a> ::buffa::MessageName for RawHTTPResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(RawHTTPResponseView);
 ::buffa::impl_view_reborrow!(RawHTTPResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(RawHTTPResponseView);
 /** Self-contained, `'static` owned view of a `RawHTTPResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`RawHTTPResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

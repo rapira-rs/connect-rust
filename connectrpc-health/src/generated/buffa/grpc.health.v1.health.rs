@@ -90,15 +90,15 @@ impl ::buffa::Message for HealthCheckRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for HealthCheckRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -206,15 +206,15 @@ impl ::buffa::Message for HealthCheckResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for HealthCheckResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -258,17 +258,17 @@ pub mod health_check_response {
         }
     }
     impl ::serde::Serialize for ServingStatus {
-        fn serialize<S: ::serde::Serializer>(
+        fn serialize<__S: ::serde::Serializer>(
             &self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             s.serialize_str(::buffa::Enumeration::proto_name(self))
         }
     }
     impl<'de> ::serde::Deserialize<'de> for ServingStatus {
-        fn deserialize<D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize<__D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             struct _V;
             impl ::serde::de::Visitor<'_> for _V {
                 type Value = ServingStatus;
@@ -282,17 +282,22 @@ pub mod health_check_response {
                         ),
                     )
                 }
-                fn visit_str<E: ::serde::de::Error>(
+                fn visit_str<__E: ::serde::de::Error>(
                     self,
                     v: &str,
-                ) -> ::core::result::Result<ServingStatus, E> {
+                ) -> ::core::result::Result<ServingStatus, __E> {
                     <ServingStatus as ::buffa::Enumeration>::from_proto_name(v)
-                        .ok_or_else(|| { ::serde::de::Error::unknown_variant(v, &[]) })
+                        .ok_or_else(|| {
+                            ::serde::de::Error::invalid_value(
+                                ::serde::de::Unexpected::Str(v),
+                                &"a known enum variant name",
+                            )
+                        })
                 }
-                fn visit_i64<E: ::serde::de::Error>(
+                fn visit_i64<__E: ::serde::de::Error>(
                     self,
                     v: i64,
-                ) -> ::core::result::Result<ServingStatus, E> {
+                ) -> ::core::result::Result<ServingStatus, __E> {
                     let v32 = i32::try_from(v)
                         .map_err(|_| {
                             ::serde::de::Error::custom(
@@ -306,10 +311,10 @@ pub mod health_check_response {
                             )
                         })
                 }
-                fn visit_u64<E: ::serde::de::Error>(
+                fn visit_u64<__E: ::serde::de::Error>(
                     self,
                     v: u64,
-                ) -> ::core::result::Result<ServingStatus, E> {
+                ) -> ::core::result::Result<ServingStatus, __E> {
                     let v32 = i32::try_from(v)
                         .map_err(|_| {
                             ::serde::de::Error::custom(
@@ -323,9 +328,9 @@ pub mod health_check_response {
                             )
                         })
                 }
-                fn visit_unit<E: ::serde::de::Error>(
+                fn visit_unit<__E: ::serde::de::Error>(
                     self,
-                ) -> ::core::result::Result<ServingStatus, E> {
+                ) -> ::core::result::Result<ServingStatus, __E> {
                     ::core::result::Result::Ok(::core::default::Default::default())
                 }
             }
@@ -333,15 +338,15 @@ pub mod health_check_response {
         }
     }
     impl ::buffa::json_helpers::ProtoElemJson for ServingStatus {
-        fn serialize_proto_json<S: ::serde::Serializer>(
+        fn serialize_proto_json<__S: ::serde::Serializer>(
             v: &Self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             ::serde::Serialize::serialize(v, s)
         }
-        fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             <Self as ::serde::Deserialize>::deserialize(d)
         }
     }

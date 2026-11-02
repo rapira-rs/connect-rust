@@ -124,6 +124,7 @@ impl<'a> ::buffa::MessageName for HealthCheckRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(HealthCheckRequestView);
 ::buffa::impl_view_reborrow!(HealthCheckRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(HealthCheckRequestView);
 /** Self-contained, `'static` owned view of a `HealthCheckRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`HealthCheckRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -383,6 +384,7 @@ impl<'a> ::buffa::MessageName for HealthCheckResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(HealthCheckResponseView);
 ::buffa::impl_view_reborrow!(HealthCheckResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(HealthCheckResponseView);
 /** Self-contained, `'static` owned view of a `HealthCheckResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`HealthCheckResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

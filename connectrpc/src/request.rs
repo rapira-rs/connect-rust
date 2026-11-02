@@ -137,7 +137,10 @@ impl<'a, Req: HasMessageView> ServiceRequest<'a, Req> {
     /// decodes the view from exactly these bytes before constructing the
     /// `ServiceRequest`.
     #[must_use]
-    pub fn to_owned_view(&self) -> OwnedView<Req::View<'static>> {
+    pub fn to_owned_view(&self) -> OwnedView<Req::View<'static>>
+    where
+        Req::View<'static>: buffa::ViewLifetimeParametric,
+    {
         OwnedView::decode(self.body.clone())
             .expect("ServiceRequest body was already view-decoded by the dispatch glue")
     }

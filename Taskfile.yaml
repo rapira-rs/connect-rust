@@ -171,13 +171,13 @@ tasks:
   # ===========================================================================
 
   buffa:link:
-    desc: Override crates.io buffa with a sibling ../buffa checkout (local only, gitignored)
+    desc: Use a sibling ../buffa checkout (local only, gitignored)
     cmds:
       - cp .cargo/config.toml.example .cargo/config.toml
       - cargo update -p buffa -p buffa-types -p buffa-codegen -p buffa-descriptor
 
   buffa:unlink:
-    desc: Remove the local buffa path override and revert to crates.io
+    desc: Remove the local buffa path override and use the pinned Git revision
     cmds:
       - rm -f .cargo/config.toml
       - cargo update -p buffa -p buffa-types -p buffa-codegen -p buffa-descriptor
@@ -204,13 +204,10 @@ tasks:
       - buf generate
 
   connectrpc-reflection:generate:
-    desc: Regenerate connectrpc-reflection Rust code from the BSR grpc.reflection protos
+    desc: Regenerate connectrpc-reflection Rust code from its descriptor set
     dir: "{{.ROOT_DIR}}/connectrpc-reflection"
     cmds:
-      - BUF_TOKEN="" buf generate
-      # The crate's own descriptor set, exposed as FILE_DESCRIPTOR_SET so
-      # servers can let the reflection service describe itself.
-      - BUF_TOKEN="" buf build buf.build/grpc/grpc --path grpc/reflection/v1/reflection.proto --path grpc/reflection/v1alpha/reflection.proto -o descriptor/reflection.fds.bin
+      - buf generate
 
   connectrpc-types:generate:
     desc: Regenerate connectrpc-types Rust code from the vendored google.rpc protos

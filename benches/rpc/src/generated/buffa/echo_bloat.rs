@@ -224,17 +224,17 @@ impl ::buffa::Message for BloatEcho {
                 ::buffa::map_codec::Str,
                 _,
             >(&self.labels, 1u64);
-        if self.auth.is_set() {
+        if let ::core::option::Option::Some(__v) = self.auth.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.auth.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.origin.is_set() {
+        if let ::core::option::Option::Some(__v) = self.origin.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.origin.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -296,21 +296,21 @@ impl ::buffa::Message for BloatEcho {
             ::buffa::map_codec::Str,
             _,
         >(&self.labels, 12u32, buf);
-        if self.auth.is_set() {
+        if let ::core::option::Option::Some(__v) = self.auth.as_option() {
             ::buffa::types::put_len_delimited_header(
                 13u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.auth.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
-        if self.origin.is_set() {
+        if let ::core::option::Option::Some(__v) = self.origin.as_option() {
             ::buffa::types::put_len_delimited_header(
                 14u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.origin.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.extra_headers {
             ::buffa::types::put_len_delimited_header(
@@ -495,15 +495,15 @@ impl ::buffa::ExtensionSet for BloatEcho {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for BloatEcho {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -687,15 +687,15 @@ impl ::buffa::ExtensionSet for BloatHeader {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for BloatHeader {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1197,15 +1197,15 @@ impl ::buffa::ExtensionSet for ScalarHeavy {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ScalarHeavy {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1438,15 +1438,15 @@ impl ::buffa::ExtensionSet for FewLargeStrings {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for FewLargeStrings {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1585,15 +1585,15 @@ impl ::buffa::ExtensionSet for NestL5 {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for NestL5 {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1674,9 +1674,9 @@ impl ::buffa::Message for NestL4 {
         if !self.b.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.b) as u64;
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.child.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1698,13 +1698,13 @@ impl ::buffa::Message for NestL4 {
         if !self.b.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.b, buf);
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.child.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -1768,15 +1768,15 @@ impl ::buffa::ExtensionSet for NestL4 {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for NestL4 {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1857,9 +1857,9 @@ impl ::buffa::Message for NestL3 {
         if !self.b.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.b) as u64;
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.child.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1881,13 +1881,13 @@ impl ::buffa::Message for NestL3 {
         if !self.b.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.b, buf);
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.child.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -1951,15 +1951,15 @@ impl ::buffa::ExtensionSet for NestL3 {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for NestL3 {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2040,9 +2040,9 @@ impl ::buffa::Message for NestL2 {
         if !self.b.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.b) as u64;
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.child.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2064,13 +2064,13 @@ impl ::buffa::Message for NestL2 {
         if !self.b.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.b, buf);
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.child.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -2134,15 +2134,15 @@ impl ::buffa::ExtensionSet for NestL2 {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for NestL2 {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2223,9 +2223,9 @@ impl ::buffa::Message for NestL1 {
         if !self.b.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.b) as u64;
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.child.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2247,13 +2247,13 @@ impl ::buffa::Message for NestL1 {
         if !self.b.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.b, buf);
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.child.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -2317,15 +2317,15 @@ impl ::buffa::ExtensionSet for NestL1 {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for NestL1 {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2408,9 +2408,9 @@ impl ::buffa::Message for DeepNested {
         if !self.root_b.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.root_b) as u64;
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.child.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2432,13 +2432,13 @@ impl ::buffa::Message for DeepNested {
         if !self.root_b.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.root_b, buf);
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.child.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -2502,15 +2502,15 @@ impl ::buffa::ExtensionSet for DeepNested {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for DeepNested {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2686,15 +2686,15 @@ impl ::buffa::ExtensionSet for MapDominated {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for MapDominated {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }

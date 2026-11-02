@@ -280,7 +280,7 @@ impl ClientCompatRequest {
     ///Sets [`Self::service`] to `Some(value)`, consuming and returning `self`.
     pub fn with_service(
         mut self,
-        value: impl Into<::buffa::alloc::string::String>,
+        value: impl ::core::convert::Into<::buffa::alloc::string::String>,
     ) -> Self {
         self.service = Some(value.into());
         self
@@ -290,7 +290,7 @@ impl ClientCompatRequest {
     ///Sets [`Self::method`] to `Some(value)`, consuming and returning `self`.
     pub fn with_method(
         mut self,
-        value: impl Into<::buffa::alloc::string::String>,
+        value: impl ::core::convert::Into<::buffa::alloc::string::String>,
     ) -> Self {
         self.method = Some(value.into());
         self
@@ -361,9 +361,9 @@ impl ::buffa::Message for ClientCompatRequest {
                 += 1u64
                     + ::buffa::types::bytes_encoded_len(&self.server_tls_cert) as u64;
         }
-        if self.client_tls_creds.is_set() {
+        if let ::core::option::Option::Some(__v) = self.client_tls_creds.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.client_tls_creds.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -414,17 +414,17 @@ impl ::buffa::Message for ClientCompatRequest {
                 += 2u64
                     + ::buffa::types::uint32_encoded_len(self.request_delay_ms) as u64;
         }
-        if self.cancel.is_set() {
+        if let ::core::option::Option::Some(__v) = self.cancel.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.cancel.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 2u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.raw_request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_request.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.raw_request.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 2u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -476,13 +476,13 @@ impl ::buffa::Message for ClientCompatRequest {
         if !self.server_tls_cert.is_empty() {
             ::buffa::types::put_shared_bytes_field(8u32, &self.server_tls_cert, buf);
         }
-        if self.client_tls_creds.is_set() {
+        if let ::core::option::Option::Some(__v) = self.client_tls_creds.as_option() {
             ::buffa::types::put_len_delimited_header(
                 9u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.client_tls_creds.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if self.message_receive_limit != 0u32 {
             ::buffa::types::put_uint32_field(10u32, self.message_receive_limit, buf);
@@ -524,21 +524,21 @@ impl ::buffa::Message for ClientCompatRequest {
         if self.request_delay_ms != 0u32 {
             ::buffa::types::put_uint32_field(18u32, self.request_delay_ms, buf);
         }
-        if self.cancel.is_set() {
+        if let ::core::option::Option::Some(__v) = self.cancel.as_option() {
             ::buffa::types::put_len_delimited_header(
                 19u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.cancel.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
-        if self.raw_request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_request.as_option() {
             ::buffa::types::put_len_delimited_header(
                 20u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.raw_request.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -774,15 +774,15 @@ impl ::buffa::ExtensionSet for ClientCompatRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ClientCompatRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -981,9 +981,9 @@ pub mod client_compat_request {
         }
     }
     impl<'de> ::serde::Deserialize<'de> for Cancel {
-        fn deserialize<D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize<__D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             struct _V;
             impl<'de> ::serde::de::Visitor<'de> for _V {
                 type Value = Cancel;
@@ -994,10 +994,10 @@ pub mod client_compat_request {
                     f.write_str("struct Cancel")
                 }
                 #[allow(clippy::field_reassign_with_default)]
-                fn visit_map<A: ::serde::de::MapAccess<'de>>(
+                fn visit_map<__A: ::serde::de::MapAccess<'de>>(
                     self,
-                    mut map: A,
-                ) -> ::core::result::Result<Cancel, A::Error> {
+                    mut map: __A,
+                ) -> ::core::result::Result<Cancel, __A::Error> {
                     let mut __oneof_cancel_timing: ::core::option::Option<
                         super::__buffa::oneof::client_compat_request::cancel::CancelTiming,
                     > = None;
@@ -1035,10 +1035,10 @@ pub mod client_compat_request {
                                 struct _DeserSeed;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _DeserSeed {
                                     type Value = u32;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
-                                    ) -> ::core::result::Result<u32, D::Error> {
+                                        d: __D,
+                                    ) -> ::core::result::Result<u32, __D::Error> {
                                         ::buffa::json_helpers::uint32::deserialize(d)
                                     }
                                 }
@@ -1065,10 +1065,10 @@ pub mod client_compat_request {
                                 struct _DeserSeed;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _DeserSeed {
                                     type Value = u32;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
-                                    ) -> ::core::result::Result<u32, D::Error> {
+                                        d: __D,
+                                    ) -> ::core::result::Result<u32, __D::Error> {
                                         ::buffa::json_helpers::uint32::deserialize(d)
                                     }
                                 }
@@ -1105,15 +1105,15 @@ pub mod client_compat_request {
         }
     }
     impl ::buffa::json_helpers::ProtoElemJson for Cancel {
-        fn serialize_proto_json<S: ::serde::Serializer>(
+        fn serialize_proto_json<__S: ::serde::Serializer>(
             v: &Self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             ::serde::Serialize::serialize(v, s)
         }
-        fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             <Self as ::serde::Deserialize>::deserialize(d)
         }
     }
@@ -1336,9 +1336,9 @@ impl ::buffa::ExtensionSet for ClientCompatResponse {
     }
 }
 impl<'de> ::serde::Deserialize<'de> for ClientCompatResponse {
-    fn deserialize<D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize<__D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         struct _V;
         impl<'de> ::serde::de::Visitor<'de> for _V {
             type Value = ClientCompatResponse;
@@ -1349,10 +1349,10 @@ impl<'de> ::serde::Deserialize<'de> for ClientCompatResponse {
                 f.write_str("struct ClientCompatResponse")
             }
             #[allow(clippy::field_reassign_with_default)]
-            fn visit_map<A: ::serde::de::MapAccess<'de>>(
+            fn visit_map<__A: ::serde::de::MapAccess<'de>>(
                 self,
-                mut map: A,
-            ) -> ::core::result::Result<ClientCompatResponse, A::Error> {
+                mut map: __A,
+            ) -> ::core::result::Result<ClientCompatResponse, __A::Error> {
                 let mut __f_test_name: ::core::option::Option<
                     ::buffa::alloc::string::String,
                 > = None;
@@ -1366,12 +1366,12 @@ impl<'de> ::serde::Deserialize<'de> for ClientCompatResponse {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::string::String;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::string::String,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::proto_string::deserialize(d)
                                     }
@@ -1444,15 +1444,15 @@ impl<'de> ::serde::Deserialize<'de> for ClientCompatResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ClientCompatResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1626,9 +1626,9 @@ impl ::buffa::Message for ClientResponseResult {
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.error.is_set() {
+        if let ::core::option::Option::Some(__v) = self.error.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.error.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1679,13 +1679,13 @@ impl ::buffa::Message for ClientResponseResult {
             );
             v.write_to(__cache, buf);
         }
-        if self.error.is_set() {
+        if let ::core::option::Option::Some(__v) = self.error.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.error.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.response_trailers {
             ::buffa::types::put_len_delimited_header(
@@ -1819,15 +1819,15 @@ impl ::buffa::ExtensionSet for ClientResponseResult {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ClientResponseResult {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1950,15 +1950,15 @@ impl ::buffa::ExtensionSet for ClientErrorResult {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ClientErrorResult {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2053,7 +2053,7 @@ impl WireDetails {
     ///Sets [`Self::actual_grpcweb_trailers`] to `Some(value)`, consuming and returning `self`.
     pub fn with_actual_grpcweb_trailers(
         mut self,
-        value: impl Into<::buffa::alloc::string::String>,
+        value: impl ::core::convert::Into<::buffa::alloc::string::String>,
     ) -> Self {
         self.actual_grpcweb_trailers = Some(value.into());
         self
@@ -2084,9 +2084,9 @@ impl ::buffa::Message for WireDetails {
                 += 1u64
                     + ::buffa::types::int32_encoded_len(self.actual_status_code) as u64;
         }
-        if self.connect_error_raw.is_set() {
+        if let ::core::option::Option::Some(__v) = self.connect_error_raw.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.connect_error_raw.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2116,13 +2116,13 @@ impl ::buffa::Message for WireDetails {
         if self.actual_status_code != 0i32 {
             ::buffa::types::put_int32_field(1u32, self.actual_status_code, buf);
         }
-        if self.connect_error_raw.is_set() {
+        if let ::core::option::Option::Some(__v) = self.connect_error_raw.as_option() {
             ::buffa::types::put_len_delimited_header(
                 2u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.connect_error_raw.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.actual_http_trailers {
             ::buffa::types::put_len_delimited_header(
@@ -2215,15 +2215,15 @@ impl ::buffa::ExtensionSet for WireDetails {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for WireDetails {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }

@@ -162,10 +162,7 @@ Regenerate all of them with:
 task generate:all
 ```
 
-This rebuilds `protoc-gen-connect-rust` (and the sibling buffa plugins
-from `../buffa`) in release mode, then runs `buf generate` in each
-directory. CI runs a separate generated-code check that fails when these
-checked-in files are stale.
+Use Buffa revision `104716922c66e21cf26895a2a5a2a42e6292f9d4` in the sibling `../buffa` checkout. The task builds `protoc-gen-connect-rust` and the Buffa plugins in release mode, then runs `buf generate` in each directory. CI checks that the generated files match these sources.
 
 ## Building Against a Local buffa Checkout
 
@@ -173,7 +170,7 @@ To test combined speculative changes across both repos:
 
 ```bash
 task buffa:link     # writes .cargo/config.toml pointing at ../buffa
-task buffa:unlink   # removes the override; reverts to crates.io / [patch]
+task buffa:unlink   # removes the override; restores the pinned Git revision
 ```
 
 The override is gitignored and never reaches CI or `cargo publish`.
@@ -193,15 +190,7 @@ repository's own builds; crates that depend on `connectrpc` resolve against
 the version requirements in `Cargo.toml` as usual, so keep those floors
 truthful.
 
-To bump one dependency: `cargo update -p <crate>` and commit the lockfile
-change. A buffa bump is `cargo update -p buffa -p buffa-types -p
-buffa-codegen -p buffa-descriptor` followed by `task generate:all`, in the
-same PR, because the generated-code check builds the buffa plugins from the
-tag matching the locked version; the locked version is the regen baseline,
-and the `buffa` requirements in `Cargo.toml` only move when the new code
-needs something the old floor lacks. `task buffa:link` rewrites the lockfile
-to path dependencies; run `task buffa:unlink` and `git restore Cargo.lock`
-before committing.
+To update one dependency, run `cargo update -p <crate>` and commit the lockfile change. For Buffa, update the Git revision in the workspace, `connectrpc`, and `connectrpc-types` manifests. Set the same revision in the generated-code CI job, the setup documentation, and the sibling `../buffa` checkout. Run `cargo update -p buffa -p buffa-types -p buffa-codegen -p buffa-descriptor`, then run `task generate:all`. Include the generated files in the same change.
 
 ## Continuous Integration
 
@@ -219,9 +208,7 @@ GitHub Actions CI (`.github/workflows/ci.yml`) runs on every push to
   across releases. Use the same dated nightly locally
   (`rustup toolchain install nightly-2026-02-27 -c rustfmt`); bump it
   together with the `fmt` job in `.github/workflows/ci.yml`
-- **Check generated code** — builds the buffa plugins at the version in
-  `Cargo.lock`, runs `task generate:all`, and verifies the checked-in
-  generated directories have no diff
+- **Check generated code**: Builds the Buffa plugins at the Git revision in `.github/workflows/ci.yml`. This revision must match `Cargo.lock` and the manifests. Runs `task generate:all` and checks that the generated directories have no diff.
 - **Documentation** — `cargo doc` with broken-intra-doc-links denied
 - **MSRV** — `cargo check` on the minimum toolchain, read from `rust-version`
   in the workspace `Cargo.toml` so the declaration and the check cannot drift

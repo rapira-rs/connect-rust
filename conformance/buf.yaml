@@ -4,4 +4,4 @@
 # To regenerate: task generate (or run buf generate manually after building the plugin)
 version: v2
 deps:
-    - buf.build/connectrpc/conformance
+    - buf.build/connectrpc/conformance:e6d2b1a1ebb247d28a8be5e1a763b0f0

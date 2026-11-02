@@ -158,6 +158,7 @@ impl<'a> ::buffa::MessageName for LogRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(LogRequestView);
 ::buffa::impl_view_reborrow!(LogRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(LogRequestView);
 /** Self-contained, `'static` owned view of a `LogRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`LogRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -522,9 +523,9 @@ impl<'a> ::buffa::ViewEncode<'a> for LogRecordView<'a> {
         if let Some(ref v) = self.span_id {
             size += 1u64 + ::buffa::types::bytes_encoded_len(v) as u64;
         }
-        if self.source.is_set() {
+        if let ::core::option::Option::Some(__v) = self.source.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.source.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -584,13 +585,13 @@ impl<'a> ::buffa::ViewEncode<'a> for LogRecordView<'a> {
         if let Some(ref v) = self.span_id {
             ::buffa::types::put_shared_bytes_field(8u32, v, buf);
         }
-        if self.source.is_set() {
+        if let ::core::option::Option::Some(__v) = self.source.as_option() {
             ::buffa::types::put_len_delimited_header(
                 9u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.source.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -641,9 +642,10 @@ impl<'__a> ::serde::Serialize for LogRecordView<'__a> {
                     __s: __S,
                 ) -> ::core::result::Result<__S::Ok, __S::Error> {
                     use ::serde::ser::SerializeMap as _;
+                    let __entries = self.0.iter_unique();
                     let mut __m = __s
-                        .serialize_map(::core::option::Option::Some(self.0.len()))?;
-                    for (k, v) in self.0.iter_unique() {
+                        .serialize_map(::core::option::Option::Some(__entries.len()))?;
+                    for (k, v) in __entries {
                         __m.serialize_entry(
                             &::buffa::json_helpers::BytesJson(k),
                             &::buffa::json_helpers::BytesJson(v),
@@ -676,6 +678,7 @@ impl<'a> ::buffa::MessageName for LogRecordView<'a> {
 }
 ::buffa::impl_default_view_instance!(LogRecordView);
 ::buffa::impl_view_reborrow!(LogRecordView);
+::buffa::unsafe_impl_view_lifetime_parametric!(LogRecordView);
 /** Self-contained, `'static` owned view of a `LogRecord` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`LogRecordView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1003,6 +1006,7 @@ impl<'a> ::buffa::MessageName for LogSourceView<'a> {
 }
 ::buffa::impl_default_view_instance!(LogSourceView);
 ::buffa::impl_view_reborrow!(LogSourceView);
+::buffa::unsafe_impl_view_lifetime_parametric!(LogSourceView);
 /** Self-contained, `'static` owned view of a `LogSource` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`LogSourceView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1327,6 +1331,7 @@ impl<'a> ::buffa::MessageName for LogIngestResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(LogIngestResponseView);
 ::buffa::impl_view_reborrow!(LogIngestResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(LogIngestResponseView);
 /** Self-contained, `'static` owned view of a `LogIngestResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`LogIngestResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

@@ -517,9 +517,9 @@ impl<'a> ::buffa::ViewEncode<'a> for ClientCompatRequestView<'a> {
                 += 1u64
                     + ::buffa::types::bytes_encoded_len(&self.server_tls_cert) as u64;
         }
-        if self.client_tls_creds.is_set() {
+        if let ::core::option::Option::Some(__v) = self.client_tls_creds.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.client_tls_creds.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -570,17 +570,17 @@ impl<'a> ::buffa::ViewEncode<'a> for ClientCompatRequestView<'a> {
                 += 2u64
                     + ::buffa::types::uint32_encoded_len(self.request_delay_ms) as u64;
         }
-        if self.cancel.is_set() {
+        if let ::core::option::Option::Some(__v) = self.cancel.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.cancel.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 2u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.raw_request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_request.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.raw_request.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 2u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -633,13 +633,13 @@ impl<'a> ::buffa::ViewEncode<'a> for ClientCompatRequestView<'a> {
         if !self.server_tls_cert.is_empty() {
             ::buffa::types::put_shared_bytes_field(8u32, &self.server_tls_cert, buf);
         }
-        if self.client_tls_creds.is_set() {
+        if let ::core::option::Option::Some(__v) = self.client_tls_creds.as_option() {
             ::buffa::types::put_len_delimited_header(
                 9u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.client_tls_creds.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if self.message_receive_limit != 0u32 {
             ::buffa::types::put_uint32_field(10u32, self.message_receive_limit, buf);
@@ -681,21 +681,21 @@ impl<'a> ::buffa::ViewEncode<'a> for ClientCompatRequestView<'a> {
         if self.request_delay_ms != 0u32 {
             ::buffa::types::put_uint32_field(18u32, self.request_delay_ms, buf);
         }
-        if self.cancel.is_set() {
+        if let ::core::option::Option::Some(__v) = self.cancel.as_option() {
             ::buffa::types::put_len_delimited_header(
                 19u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.cancel.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
-        if self.raw_request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_request.as_option() {
             ::buffa::types::put_len_delimited_header(
                 20u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.raw_request.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -809,6 +809,7 @@ impl<'a> ::buffa::MessageName for ClientCompatRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(ClientCompatRequestView);
 ::buffa::impl_view_reborrow!(ClientCompatRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ClientCompatRequestView);
 /** Self-contained, `'static` owned view of a `ClientCompatRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ClientCompatRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1408,6 +1409,7 @@ pub mod client_compat_request {
     }
     ::buffa::impl_default_view_instance!(CancelView);
     ::buffa::impl_view_reborrow!(CancelView);
+    ::buffa::unsafe_impl_view_lifetime_parametric!(CancelView);
     /** Self-contained, `'static` owned view of a `Cancel` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`CancelView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1825,6 +1827,7 @@ impl<'a> ::buffa::MessageName for ClientCompatResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ClientCompatResponseView);
 ::buffa::impl_view_reborrow!(ClientCompatResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ClientCompatResponseView);
 /** Self-contained, `'static` owned view of a `ClientCompatResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ClientCompatResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2227,9 +2230,9 @@ impl<'a> ::buffa::ViewEncode<'a> for ClientResponseResultView<'a> {
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.error.is_set() {
+        if let ::core::option::Option::Some(__v) = self.error.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.error.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2281,13 +2284,13 @@ impl<'a> ::buffa::ViewEncode<'a> for ClientResponseResultView<'a> {
             );
             v.write_to(__cache, buf);
         }
-        if self.error.is_set() {
+        if let ::core::option::Option::Some(__v) = self.error.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.error.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.response_trailers {
             ::buffa::types::put_len_delimited_header(
@@ -2369,6 +2372,7 @@ impl<'a> ::buffa::MessageName for ClientResponseResultView<'a> {
 }
 ::buffa::impl_default_view_instance!(ClientResponseResultView);
 ::buffa::impl_view_reborrow!(ClientResponseResultView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ClientResponseResultView);
 /** Self-contained, `'static` owned view of a `ClientResponseResult` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ClientResponseResultView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2694,6 +2698,7 @@ impl<'a> ::buffa::MessageName for ClientErrorResultView<'a> {
 }
 ::buffa::impl_default_view_instance!(ClientErrorResultView);
 ::buffa::impl_view_reborrow!(ClientErrorResultView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ClientErrorResultView);
 /** Self-contained, `'static` owned view of a `ClientErrorResult` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ClientErrorResultView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2994,9 +2999,9 @@ impl<'a> ::buffa::ViewEncode<'a> for WireDetailsView<'a> {
                 += 1u64
                     + ::buffa::types::int32_encoded_len(self.actual_status_code) as u64;
         }
-        if self.connect_error_raw.is_set() {
+        if let ::core::option::Option::Some(__v) = self.connect_error_raw.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.connect_error_raw.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -3027,13 +3032,13 @@ impl<'a> ::buffa::ViewEncode<'a> for WireDetailsView<'a> {
         if self.actual_status_code != 0i32 {
             ::buffa::types::put_int32_field(1u32, self.actual_status_code, buf);
         }
-        if self.connect_error_raw.is_set() {
+        if let ::core::option::Option::Some(__v) = self.connect_error_raw.as_option() {
             ::buffa::types::put_len_delimited_header(
                 2u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.connect_error_raw.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.actual_http_trailers {
             ::buffa::types::put_len_delimited_header(
@@ -3097,6 +3102,7 @@ impl<'a> ::buffa::MessageName for WireDetailsView<'a> {
 }
 ::buffa::impl_default_view_instance!(WireDetailsView);
 ::buffa::impl_view_reborrow!(WireDetailsView);
+::buffa::unsafe_impl_view_lifetime_parametric!(WireDetailsView);
 /** Self-contained, `'static` owned view of a `WireDetails` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`WireDetailsView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

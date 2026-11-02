@@ -687,7 +687,7 @@ pub(crate) fn decode_request_view<ReqView>(
     options: &buffa::DecodeOptions,
 ) -> Result<OwnedView<ReqView>, ConnectError>
 where
-    ReqView: MessageView<'static> + Send,
+    ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send,
     ReqView::Owned: Message + JsonDeserialize,
 {
     let body = request_proto_bytes::<ReqView::Owned>(request, format)?;
@@ -841,7 +841,7 @@ where
 impl<H, ReqView> ErasedHandler for UnaryViewHandlerWrapper<H, ReqView>
 where
     H: ViewHandler<ReqView>,
-    ReqView: MessageView<'static> + Send + Sync + 'static,
+    ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send + Sync + 'static,
     ReqView::Owned: Message + JsonDeserialize,
 {
     fn call_erased(
@@ -961,7 +961,7 @@ where
 impl<H, ReqView, Res> ErasedStreamingHandler for ServerStreamingViewHandlerWrapper<H, ReqView, Res>
 where
     H: ViewStreamingHandler<ReqView, Res>,
-    ReqView: MessageView<'static> + Send + Sync + 'static,
+    ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send + Sync + 'static,
     ReqView::Owned: Message + JsonDeserialize,
     Res: Message + Send + 'static,
 {
@@ -1070,7 +1070,7 @@ where
 impl<H, ReqView> ErasedClientStreamingHandler for ClientStreamingViewHandlerWrapper<H, ReqView>
 where
     H: ViewClientStreamingHandler<ReqView>,
-    ReqView: MessageView<'static> + Send + Sync + 'static,
+    ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send + Sync + 'static,
     ReqView::Owned: Message + JsonDeserialize,
 {
     fn call_erased(
@@ -1192,7 +1192,7 @@ impl<H, ReqView, Res> ErasedBidiStreamingHandler
     for BidiStreamingViewHandlerWrapper<H, ReqView, Res>
 where
     H: ViewBidiStreamingHandler<ReqView, Res>,
-    ReqView: MessageView<'static> + Send + Sync + 'static,
+    ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send + Sync + 'static,
     ReqView::Owned: Message + JsonDeserialize,
     Res: Message + Send + 'static,
 {

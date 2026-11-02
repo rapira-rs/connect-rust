@@ -80,7 +80,10 @@ impl<M: HasMessageView> StreamMessage<M> {
     /// path. The decode below cannot fail: it reads back bytes just encoded
     /// here, with every wire-facing limit lifted.
     #[must_use]
-    pub fn from_message(message: &M) -> Self {
+    pub fn from_message(message: &M) -> Self
+    where
+        M::View<'static>: buffa::ViewLifetimeParametric,
+    {
         let bytes = Bytes::from(buffa::Message::encode_to_vec(message));
         // The input is trusted local data, so decode without the wire-facing
         // recursion, unknown-field, and element-memory limits: a just-encoded
@@ -119,7 +122,10 @@ impl<M: HasMessageView> StreamMessage<M> {
     /// `OwnedView` can only come from buffa's wire decoder and conversion
     /// replays under the budget the decode already charged.
     #[must_use]
-    pub fn to_owned_message(&self) -> M {
+    pub fn to_owned_message(&self) -> M
+    where
+        M::View<'static>: ViewReborrow,
+    {
         self.inner.as_ref().to_owned_message()
     }
 
@@ -183,6 +189,7 @@ where
 impl<M> Encodable<M> for StreamMessage<M>
 where
     M: HasMessageView + JsonSerialize,
+    M::View<'static>: ViewReborrow,
 {
     fn encode(&self, codec: CodecFormat) -> Result<Bytes, ConnectError> {
         match codec {

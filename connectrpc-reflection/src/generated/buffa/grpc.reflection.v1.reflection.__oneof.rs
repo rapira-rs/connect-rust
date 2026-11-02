@@ -18,22 +18,23 @@ pub mod server_reflection_request {
         ListServices(::buffa::alloc::string::String),
     }
     impl ::buffa::Oneof for MessageRequest {}
-    impl From<super::super::super::ExtensionRequest> for MessageRequest {
+    impl ::core::convert::From<super::super::super::ExtensionRequest>
+    for MessageRequest {
         fn from(v: super::super::super::ExtensionRequest) -> Self {
             Self::FileContainingExtension(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::ExtensionRequest>
+    impl ::core::convert::From<super::super::super::ExtensionRequest>
     for ::core::option::Option<MessageRequest> {
         fn from(v: super::super::super::ExtensionRequest) -> Self {
             Self::Some(MessageRequest::from(v))
         }
     }
     impl ::serde::Serialize for MessageRequest {
-        fn serialize<S: ::serde::Serializer>(
+        fn serialize<__S: ::serde::Serializer>(
             &self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             use ::serde::ser::SerializeMap;
             let mut map = s.serialize_map(Some(1))?;
             match self {
@@ -76,55 +77,58 @@ pub mod server_reflection_response {
         ErrorResponse(::buffa::alloc::boxed::Box<super::super::super::ErrorResponse>),
     }
     impl ::buffa::Oneof for MessageResponse {}
-    impl From<super::super::super::FileDescriptorResponse> for MessageResponse {
+    impl ::core::convert::From<super::super::super::FileDescriptorResponse>
+    for MessageResponse {
         fn from(v: super::super::super::FileDescriptorResponse) -> Self {
             Self::FileDescriptorResponse(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::FileDescriptorResponse>
+    impl ::core::convert::From<super::super::super::FileDescriptorResponse>
     for ::core::option::Option<MessageResponse> {
         fn from(v: super::super::super::FileDescriptorResponse) -> Self {
             Self::Some(MessageResponse::from(v))
         }
     }
-    impl From<super::super::super::ExtensionNumberResponse> for MessageResponse {
+    impl ::core::convert::From<super::super::super::ExtensionNumberResponse>
+    for MessageResponse {
         fn from(v: super::super::super::ExtensionNumberResponse) -> Self {
             Self::AllExtensionNumbersResponse(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::ExtensionNumberResponse>
+    impl ::core::convert::From<super::super::super::ExtensionNumberResponse>
     for ::core::option::Option<MessageResponse> {
         fn from(v: super::super::super::ExtensionNumberResponse) -> Self {
             Self::Some(MessageResponse::from(v))
         }
     }
-    impl From<super::super::super::ListServiceResponse> for MessageResponse {
+    impl ::core::convert::From<super::super::super::ListServiceResponse>
+    for MessageResponse {
         fn from(v: super::super::super::ListServiceResponse) -> Self {
             Self::ListServicesResponse(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::ListServiceResponse>
+    impl ::core::convert::From<super::super::super::ListServiceResponse>
     for ::core::option::Option<MessageResponse> {
         fn from(v: super::super::super::ListServiceResponse) -> Self {
             Self::Some(MessageResponse::from(v))
         }
     }
-    impl From<super::super::super::ErrorResponse> for MessageResponse {
+    impl ::core::convert::From<super::super::super::ErrorResponse> for MessageResponse {
         fn from(v: super::super::super::ErrorResponse) -> Self {
             Self::ErrorResponse(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::ErrorResponse>
+    impl ::core::convert::From<super::super::super::ErrorResponse>
     for ::core::option::Option<MessageResponse> {
         fn from(v: super::super::super::ErrorResponse) -> Self {
             Self::Some(MessageResponse::from(v))
         }
     }
     impl ::serde::Serialize for MessageResponse {
-        fn serialize<S: ::serde::Serializer>(
+        fn serialize<__S: ::serde::Serializer>(
             &self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             use ::serde::ser::SerializeMap;
             let mut map = s.serialize_map(Some(1))?;
             match self {

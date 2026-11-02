@@ -424,7 +424,7 @@ impl Payload {
     ///   buffa's defaults rather than these limits for the same reason.
     pub fn view<V>(&self) -> Result<OwnedView<V>, ConnectError>
     where
-        V: MessageView<'static>,
+        V: MessageView<'static> + buffa::ViewLifetimeParametric,
     {
         if let Some(replaced) = &self.replaced {
             // A replacement was just encoded from a message this process

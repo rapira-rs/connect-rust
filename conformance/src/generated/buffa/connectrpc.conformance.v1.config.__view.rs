@@ -171,9 +171,9 @@ impl<'a> ::buffa::ViewEncode<'a> for ConfigView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.features.is_set() {
+        if let ::core::option::Option::Some(__v) = self.features.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.features.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -206,13 +206,13 @@ impl<'a> ::buffa::ViewEncode<'a> for ConfigView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.features.is_set() {
+        if let ::core::option::Option::Some(__v) = self.features.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.features.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.include_cases {
             ::buffa::types::put_len_delimited_header(
@@ -273,6 +273,7 @@ impl<'a> ::buffa::MessageName for ConfigView<'a> {
 }
 ::buffa::impl_default_view_instance!(ConfigView);
 ::buffa::impl_view_reborrow!(ConfigView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ConfigView);
 /** Self-contained, `'static` owned view of a `Config` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ConfigView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1010,6 +1011,7 @@ impl<'a> ::buffa::MessageName for FeaturesView<'a> {
 }
 ::buffa::impl_default_view_instance!(FeaturesView);
 ::buffa::impl_view_reborrow!(FeaturesView);
+::buffa::unsafe_impl_view_lifetime_parametric!(FeaturesView);
 /** Self-contained, `'static` owned view of a `Features` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`FeaturesView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1562,6 +1564,7 @@ impl<'a> ::buffa::MessageName for ConfigCaseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ConfigCaseView);
 ::buffa::impl_view_reborrow!(ConfigCaseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ConfigCaseView);
 /** Self-contained, `'static` owned view of a `ConfigCase` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ConfigCaseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1884,6 +1887,7 @@ impl<'a> ::buffa::MessageName for TLSCredsView<'a> {
 }
 ::buffa::impl_default_view_instance!(TLSCredsView);
 ::buffa::impl_view_reborrow!(TLSCredsView);
+::buffa::unsafe_impl_view_lifetime_parametric!(TLSCredsView);
 /** Self-contained, `'static` owned view of a `TLSCreds` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`TLSCredsView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

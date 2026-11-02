@@ -233,9 +233,9 @@ impl ::buffa::Message for ServerReflectionRequest {
     }
 }
 impl<'de> ::serde::Deserialize<'de> for ServerReflectionRequest {
-    fn deserialize<D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize<__D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         struct _V;
         impl<'de> ::serde::de::Visitor<'de> for _V {
             type Value = ServerReflectionRequest;
@@ -246,10 +246,10 @@ impl<'de> ::serde::Deserialize<'de> for ServerReflectionRequest {
                 f.write_str("struct ServerReflectionRequest")
             }
             #[allow(clippy::field_reassign_with_default)]
-            fn visit_map<A: ::serde::de::MapAccess<'de>>(
+            fn visit_map<__A: ::serde::de::MapAccess<'de>>(
                 self,
-                mut map: A,
-            ) -> ::core::result::Result<ServerReflectionRequest, A::Error> {
+                mut map: __A,
+            ) -> ::core::result::Result<ServerReflectionRequest, __A::Error> {
                 let mut __f_host: ::core::option::Option<
                     ::buffa::alloc::string::String,
                 > = None;
@@ -263,12 +263,12 @@ impl<'de> ::serde::Deserialize<'de> for ServerReflectionRequest {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::string::String;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::string::String,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::proto_string::deserialize(d)
                                     }
@@ -422,15 +422,15 @@ impl<'de> ::serde::Deserialize<'de> for ServerReflectionRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ServerReflectionRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -572,15 +572,15 @@ impl ::buffa::Message for ExtensionRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ExtensionRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -658,9 +658,9 @@ impl ::buffa::Message for ServerReflectionResponse {
         if !self.valid_host.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.valid_host) as u64;
         }
-        if self.original_request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.original_request.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.original_request.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -722,13 +722,13 @@ impl ::buffa::Message for ServerReflectionResponse {
         if !self.valid_host.is_empty() {
             ::buffa::types::put_string_field(1u32, &self.valid_host, buf);
         }
-        if self.original_request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.original_request.as_option() {
             ::buffa::types::put_len_delimited_header(
                 2u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.original_request.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if let ::core::option::Option::Some(ref v) = self.message_response {
             match v {
@@ -905,9 +905,9 @@ impl ::buffa::Message for ServerReflectionResponse {
     }
 }
 impl<'de> ::serde::Deserialize<'de> for ServerReflectionResponse {
-    fn deserialize<D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize<__D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         struct _V;
         impl<'de> ::serde::de::Visitor<'de> for _V {
             type Value = ServerReflectionResponse;
@@ -918,10 +918,10 @@ impl<'de> ::serde::Deserialize<'de> for ServerReflectionResponse {
                 f.write_str("struct ServerReflectionResponse")
             }
             #[allow(clippy::field_reassign_with_default)]
-            fn visit_map<A: ::serde::de::MapAccess<'de>>(
+            fn visit_map<__A: ::serde::de::MapAccess<'de>>(
                 self,
-                mut map: A,
-            ) -> ::core::result::Result<ServerReflectionResponse, A::Error> {
+                mut map: __A,
+            ) -> ::core::result::Result<ServerReflectionResponse, __A::Error> {
                 let mut __f_valid_host: ::core::option::Option<
                     ::buffa::alloc::string::String,
                 > = None;
@@ -941,12 +941,12 @@ impl<'de> ::serde::Deserialize<'de> for ServerReflectionResponse {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::string::String;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::string::String,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::proto_string::deserialize(d)
                                     }
@@ -1082,15 +1082,15 @@ impl<'de> ::serde::Deserialize<'de> for ServerReflectionResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ServerReflectionResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1212,15 +1212,15 @@ impl ::buffa::Message for FileDescriptorResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for FileDescriptorResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1252,8 +1252,8 @@ pub struct ExtensionNumberResponse {
     #[serde(
         rename = "extensionNumber",
         alias = "extension_number",
-        skip_serializing_if = "::buffa::json_helpers::skip_if::is_empty_vec",
-        deserialize_with = "::buffa::json_helpers::null_as_default"
+        with = "::buffa::json_helpers::proto_seq",
+        skip_serializing_if = "::buffa::json_helpers::skip_if::is_empty_vec"
     )]
     pub extension_number: ::buffa::alloc::vec::Vec<i32>,
 }
@@ -1399,15 +1399,15 @@ impl ::buffa::Message for ExtensionNumberResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ExtensionNumberResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1526,15 +1526,15 @@ impl ::buffa::Message for ListServiceResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ListServiceResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1639,15 +1639,15 @@ impl ::buffa::Message for ServiceResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ServiceResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1777,15 +1777,15 @@ impl ::buffa::Message for ErrorResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ErrorResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }

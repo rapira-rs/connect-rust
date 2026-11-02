@@ -38,20 +38,20 @@ with the [README quick start](../README.md#quick-start) and the
 | `connectrpc-reflection` | The standard gRPC server reflection service (`grpc.reflection.v1` + `v1alpha`) for `grpcurl` / `buf curl` / Postman / `grpcui` ([Server reflection](#server-reflection)) |
 | `connectrpc-types` | Shared `google.rpc` message types: `Status`, `Code`, and the standard error details ([Errors and status codes](#errors-and-status-codes)) |
 
-Generated code references a small set of crates from your namespace, so
-a working `Cargo.toml` needs more than the runtime itself — this is the
-complete dependency block for a typical (JSON-capable) service:
+This fork uses the `fix/buffa-json-limits` branch of `rapira-rs/connect-rust`. Its runtime and generated message types require Buffa revision `104716922c66e21cf26895a2a5a2a42e6292f9d4`.
+
+Use these dependencies for a service with JSON support:
 
 ```toml
 [dependencies]
-connectrpc = "0.9"
-buffa = { version = "0.9", features = ["json"] }
-buffa-types = { version = "0.9", features = ["json"] }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits" }
+buffa = { git = "https://github.com/anthropics/buffa", rev = "104716922c66e21cf26895a2a5a2a42e6292f9d4", features = ["json"] }
+buffa-types = { git = "https://github.com/anthropics/buffa", rev = "104716922c66e21cf26895a2a5a2a42e6292f9d4", features = ["json"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
 [build-dependencies]
-connectrpc-build = "0.9"
+connectrpc-build = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits" }
 ```
 
 The `buffa`/`serde` entries come from buffa's generated message types.
@@ -85,16 +85,16 @@ Common combinations:
 
 ```toml
 # Just the server, behind axum
-connectrpc = { version = "0.9", features = ["axum"] }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", features = ["axum"] }
 
 # Server + client, both with TLS
-connectrpc = { version = "0.9", features = ["axum", "client", "tls"] }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", features = ["axum", "client", "tls"] }
 
 # Built-in server (no axum)
-connectrpc = { version = "0.9", features = ["server"] }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", features = ["server"] }
 
 # Minimal (wasm-friendly: no networking, no native compression)
-connectrpc = { version = "0.9", default-features = false }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", default-features = false }
 ```
 
 ### Proto-only (no-JSON) builds
@@ -120,7 +120,7 @@ It takes two coordinated settings:
    # `default-features = false` is the only way to drop `json`, so it also drops
    # the default compression features (`gzip`/`zstd`) — re-list the ones you
    # still want.
-   connectrpc = { version = "0.9", default-features = false, features = ["server", "gzip", "zstd"] }
+   connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", default-features = false, features = ["server", "gzip", "zstd"] }
    ```
 
 With `json` off, the `Message + serde` requirement is replaced by the
@@ -161,7 +161,7 @@ unused serde impls, turn it off the same way, and re-list `views` if generated
 code has these types as fields:
 
 ```toml
-connectrpc-types = { version = "0.9", default-features = false, features = ["views"] }
+connectrpc-types = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", default-features = false, features = ["views"] }
 ```
 
 Such code comes from `protoc-gen-buffa`, so remove its serde impls by leaving
@@ -193,7 +193,7 @@ Generate code with `connectrpc-build` in `build.rs`:
 
 ```toml
 [build-dependencies]
-connectrpc-build = "0.9"
+connectrpc-build = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits" }
 ```
 
 ```rust
@@ -1760,8 +1760,8 @@ route for `httpGet:` probes; add the gRPC service for `grpc:` probes.
 
 ```toml
 [dependencies]
-connectrpc = { version = "0.9", features = ["server"] }
-connectrpc-health = "0.9"
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", features = ["server"] }
+connectrpc-health = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits" }
 ```
 
 ```rust,no_run
@@ -1832,8 +1832,8 @@ Server-only deployments turn it off:
 
 ```toml
 [dependencies]
-connectrpc = { version = "0.9", features = ["server"] }
-connectrpc-health = { version = "0.9", default-features = false }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", features = ["server"] }
+connectrpc-health = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", default-features = false }
 ```
 
 That drops `connectrpc/client` (the HTTP/2 transport stack) from the
@@ -1861,8 +1861,8 @@ gRPC, gRPC-Web, and the Connect protocol alike.
 
 ```toml
 [dependencies]
-connectrpc = { version = "0.9", features = ["server"] }
-connectrpc-reflection = "0.9"
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", features = ["server"] }
+connectrpc-reflection = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits" }
 ```
 
 Emit a descriptor set from your build script (see
@@ -2257,7 +2257,7 @@ ready-made in the `connectrpc-types` crate, so peers in other languages
 recognise them:
 
 ```toml
-connectrpc-types = "0.9"
+connectrpc-types = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits" }
 ```
 
 ```rust

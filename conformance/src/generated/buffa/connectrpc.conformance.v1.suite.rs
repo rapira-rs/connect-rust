@@ -617,15 +617,15 @@ impl ::buffa::ExtensionSet for TestSuite {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for TestSuite {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -673,17 +673,17 @@ pub mod test_suite {
         }
     }
     impl ::serde::Serialize for TestMode {
-        fn serialize<S: ::serde::Serializer>(
+        fn serialize<__S: ::serde::Serializer>(
             &self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             s.serialize_str(::buffa::Enumeration::proto_name(self))
         }
     }
     impl<'de> ::serde::Deserialize<'de> for TestMode {
-        fn deserialize<D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize<__D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             struct _V;
             impl ::serde::de::Visitor<'_> for _V {
                 type Value = TestMode;
@@ -695,17 +695,22 @@ pub mod test_suite {
                         concat!("a string, integer, or null for ", stringify!(TestMode)),
                     )
                 }
-                fn visit_str<E: ::serde::de::Error>(
+                fn visit_str<__E: ::serde::de::Error>(
                     self,
                     v: &str,
-                ) -> ::core::result::Result<TestMode, E> {
+                ) -> ::core::result::Result<TestMode, __E> {
                     <TestMode as ::buffa::Enumeration>::from_proto_name(v)
-                        .ok_or_else(|| { ::serde::de::Error::unknown_variant(v, &[]) })
+                        .ok_or_else(|| {
+                            ::serde::de::Error::invalid_value(
+                                ::serde::de::Unexpected::Str(v),
+                                &"a known enum variant name",
+                            )
+                        })
                 }
-                fn visit_i64<E: ::serde::de::Error>(
+                fn visit_i64<__E: ::serde::de::Error>(
                     self,
                     v: i64,
-                ) -> ::core::result::Result<TestMode, E> {
+                ) -> ::core::result::Result<TestMode, __E> {
                     let v32 = i32::try_from(v)
                         .map_err(|_| {
                             ::serde::de::Error::custom(
@@ -719,10 +724,10 @@ pub mod test_suite {
                             )
                         })
                 }
-                fn visit_u64<E: ::serde::de::Error>(
+                fn visit_u64<__E: ::serde::de::Error>(
                     self,
                     v: u64,
-                ) -> ::core::result::Result<TestMode, E> {
+                ) -> ::core::result::Result<TestMode, __E> {
                     let v32 = i32::try_from(v)
                         .map_err(|_| {
                             ::serde::de::Error::custom(
@@ -736,9 +741,9 @@ pub mod test_suite {
                             )
                         })
                 }
-                fn visit_unit<E: ::serde::de::Error>(
+                fn visit_unit<__E: ::serde::de::Error>(
                     self,
-                ) -> ::core::result::Result<TestMode, E> {
+                ) -> ::core::result::Result<TestMode, __E> {
                     ::core::result::Result::Ok(::core::default::Default::default())
                 }
             }
@@ -746,15 +751,15 @@ pub mod test_suite {
         }
     }
     impl ::buffa::json_helpers::ProtoElemJson for TestMode {
-        fn serialize_proto_json<S: ::serde::Serializer>(
+        fn serialize_proto_json<__S: ::serde::Serializer>(
             v: &Self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             ::serde::Serialize::serialize(v, s)
         }
-        fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             <Self as ::serde::Deserialize>::deserialize(d)
         }
     }
@@ -830,17 +835,17 @@ pub mod test_suite {
         }
     }
     impl ::serde::Serialize for ConnectVersionMode {
-        fn serialize<S: ::serde::Serializer>(
+        fn serialize<__S: ::serde::Serializer>(
             &self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             s.serialize_str(::buffa::Enumeration::proto_name(self))
         }
     }
     impl<'de> ::serde::Deserialize<'de> for ConnectVersionMode {
-        fn deserialize<D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize<__D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             struct _V;
             impl ::serde::de::Visitor<'_> for _V {
                 type Value = ConnectVersionMode;
@@ -855,17 +860,22 @@ pub mod test_suite {
                         ),
                     )
                 }
-                fn visit_str<E: ::serde::de::Error>(
+                fn visit_str<__E: ::serde::de::Error>(
                     self,
                     v: &str,
-                ) -> ::core::result::Result<ConnectVersionMode, E> {
+                ) -> ::core::result::Result<ConnectVersionMode, __E> {
                     <ConnectVersionMode as ::buffa::Enumeration>::from_proto_name(v)
-                        .ok_or_else(|| { ::serde::de::Error::unknown_variant(v, &[]) })
+                        .ok_or_else(|| {
+                            ::serde::de::Error::invalid_value(
+                                ::serde::de::Unexpected::Str(v),
+                                &"a known enum variant name",
+                            )
+                        })
                 }
-                fn visit_i64<E: ::serde::de::Error>(
+                fn visit_i64<__E: ::serde::de::Error>(
                     self,
                     v: i64,
-                ) -> ::core::result::Result<ConnectVersionMode, E> {
+                ) -> ::core::result::Result<ConnectVersionMode, __E> {
                     let v32 = i32::try_from(v)
                         .map_err(|_| {
                             ::serde::de::Error::custom(
@@ -879,10 +889,10 @@ pub mod test_suite {
                             )
                         })
                 }
-                fn visit_u64<E: ::serde::de::Error>(
+                fn visit_u64<__E: ::serde::de::Error>(
                     self,
                     v: u64,
-                ) -> ::core::result::Result<ConnectVersionMode, E> {
+                ) -> ::core::result::Result<ConnectVersionMode, __E> {
                     let v32 = i32::try_from(v)
                         .map_err(|_| {
                             ::serde::de::Error::custom(
@@ -896,9 +906,9 @@ pub mod test_suite {
                             )
                         })
                 }
-                fn visit_unit<E: ::serde::de::Error>(
+                fn visit_unit<__E: ::serde::de::Error>(
                     self,
-                ) -> ::core::result::Result<ConnectVersionMode, E> {
+                ) -> ::core::result::Result<ConnectVersionMode, __E> {
                     ::core::result::Result::Ok(::core::default::Default::default())
                 }
             }
@@ -906,15 +916,15 @@ pub mod test_suite {
         }
     }
     impl ::buffa::json_helpers::ProtoElemJson for ConnectVersionMode {
-        fn serialize_proto_json<S: ::serde::Serializer>(
+        fn serialize_proto_json<__S: ::serde::Serializer>(
             v: &Self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             ::serde::Serialize::serialize(v, s)
         }
-        fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             <Self as ::serde::Deserialize>::deserialize(d)
         }
     }
@@ -1091,9 +1101,9 @@ impl ::buffa::Message for TestCase {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.request.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.request.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1107,9 +1117,9 @@ impl ::buffa::Message for TestCase {
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.expected_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.expected_response.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.expected_response.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1133,13 +1143,13 @@ impl ::buffa::Message for TestCase {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.request.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.request.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.expand_requests {
             ::buffa::types::put_len_delimited_header(
@@ -1149,13 +1159,13 @@ impl ::buffa::Message for TestCase {
             );
             v.write_to(__cache, buf);
         }
-        if self.expected_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.expected_response.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.expected_response.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if !self.other_allowed_error_codes.is_empty() {
             let payload: u64 = self
@@ -1278,15 +1288,15 @@ impl ::buffa::ExtensionSet for TestCase {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for TestCase {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1424,15 +1434,15 @@ pub mod test_case {
         }
     }
     impl ::buffa::json_helpers::ProtoElemJson for ExpandedSize {
-        fn serialize_proto_json<S: ::serde::Serializer>(
+        fn serialize_proto_json<__S: ::serde::Serializer>(
             v: &Self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             ::serde::Serialize::serialize(v, s)
         }
-        fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             <Self as ::serde::Deserialize>::deserialize(d)
         }
     }

@@ -248,9 +248,9 @@ impl<'a> ::buffa::ViewEncode<'a> for ServerCompatRequestView<'a> {
                     + ::buffa::types::uint32_encoded_len(self.message_receive_limit)
                         as u64;
         }
-        if self.server_creds.is_set() {
+        if let ::core::option::Option::Some(__v) = self.server_creds.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.server_creds.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -288,13 +288,13 @@ impl<'a> ::buffa::ViewEncode<'a> for ServerCompatRequestView<'a> {
         if self.message_receive_limit != 0u32 {
             ::buffa::types::put_uint32_field(6u32, self.message_receive_limit, buf);
         }
-        if self.server_creds.is_set() {
+        if let ::core::option::Option::Some(__v) = self.server_creds.as_option() {
             ::buffa::types::put_len_delimited_header(
                 7u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.server_creds.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -356,6 +356,7 @@ impl<'a> ::buffa::MessageName for ServerCompatRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(ServerCompatRequestView);
 ::buffa::impl_view_reborrow!(ServerCompatRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ServerCompatRequestView);
 /** Self-contained, `'static` owned view of a `ServerCompatRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ServerCompatRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -738,6 +739,7 @@ impl<'a> ::buffa::MessageName for ServerCompatResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ServerCompatResponseView);
 ::buffa::impl_view_reborrow!(ServerCompatResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ServerCompatResponseView);
 /** Self-contained, `'static` owned view of a `ServerCompatResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ServerCompatResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

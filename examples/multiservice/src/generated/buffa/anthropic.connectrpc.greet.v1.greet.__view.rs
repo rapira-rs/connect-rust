@@ -133,6 +133,7 @@ impl<'a> ::buffa::MessageName for GreetRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(GreetRequestView);
 ::buffa::impl_view_reborrow!(GreetRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(GreetRequestView);
 /** Self-contained, `'static` owned view of a `GreetRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`GreetRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -383,6 +384,7 @@ impl<'a> ::buffa::MessageName for GreetResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(GreetResponseView);
 ::buffa::impl_view_reborrow!(GreetResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(GreetResponseView);
 /** Self-contained, `'static` owned view of a `GreetResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`GreetResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

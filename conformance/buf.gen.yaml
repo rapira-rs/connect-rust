@@ -15,7 +15,7 @@ version: v2
 managed:
     enabled: true
 inputs:
-    - module: buf.build/connectrpc/conformance
+    - module: buf.build/connectrpc/conformance:e6d2b1a1ebb247d28a8be5e1a763b0f0
 plugins:
     - local: ../../buffa/target/release/protoc-gen-buffa
       out: src/generated/buffa

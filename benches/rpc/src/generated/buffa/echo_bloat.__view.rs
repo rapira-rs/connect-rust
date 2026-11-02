@@ -380,17 +380,17 @@ impl<'a> ::buffa::ViewEncode<'a> for BloatEchoView<'a> {
                 + 1u64 + ::buffa::types::string_encoded_len(v) as u64;
             size += 1u64 + ::buffa::encoding::varint_len(entry_size) as u64 + entry_size;
         }
-        if self.auth.is_set() {
+        if let ::core::option::Option::Some(__v) = self.auth.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.auth.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.origin.is_set() {
+        if let ::core::option::Option::Some(__v) = self.origin.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.origin.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -470,21 +470,21 @@ impl<'a> ::buffa::ViewEncode<'a> for BloatEchoView<'a> {
                 .encode(buf);
             ::buffa::types::encode_string(v, buf);
         }
-        if self.auth.is_set() {
+        if let ::core::option::Option::Some(__v) = self.auth.as_option() {
             ::buffa::types::put_len_delimited_header(
                 13u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.auth.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
-        if self.origin.is_set() {
+        if let ::core::option::Option::Some(__v) = self.origin.as_option() {
             ::buffa::types::put_len_delimited_header(
                 14u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.origin.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.extra_headers {
             ::buffa::types::put_len_delimited_header(
@@ -564,9 +564,10 @@ impl<'__a> ::serde::Serialize for BloatEchoView<'__a> {
                     __s: __S,
                 ) -> ::core::result::Result<__S::Ok, __S::Error> {
                     use ::serde::ser::SerializeMap as _;
+                    let __entries = self.0.iter_unique();
                     let mut __m = __s
-                        .serialize_map(::core::option::Option::Some(self.0.len()))?;
-                    for (k, v) in self.0.iter_unique() {
+                        .serialize_map(::core::option::Option::Some(__entries.len()))?;
+                    for (k, v) in __entries {
                         __m.serialize_entry(k, v)?;
                     }
                     __m.end()
@@ -598,6 +599,7 @@ impl<'a> ::buffa::MessageName for BloatEchoView<'a> {
 }
 ::buffa::impl_default_view_instance!(BloatEchoView);
 ::buffa::impl_view_reborrow!(BloatEchoView);
+::buffa::unsafe_impl_view_lifetime_parametric!(BloatEchoView);
 /** Self-contained, `'static` owned view of a `BloatEcho` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`BloatEchoView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -988,6 +990,7 @@ impl<'a> ::buffa::MessageName for BloatHeaderView<'a> {
 }
 ::buffa::impl_default_view_instance!(BloatHeaderView);
 ::buffa::impl_view_reborrow!(BloatHeaderView);
+::buffa::unsafe_impl_view_lifetime_parametric!(BloatHeaderView);
 /** Self-contained, `'static` owned view of a `BloatHeader` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`BloatHeaderView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1579,6 +1582,7 @@ impl<'a> ::buffa::MessageName for ScalarHeavyView<'a> {
 }
 ::buffa::impl_default_view_instance!(ScalarHeavyView);
 ::buffa::impl_view_reborrow!(ScalarHeavyView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ScalarHeavyView);
 /** Self-contained, `'static` owned view of a `ScalarHeavy` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ScalarHeavyView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2005,6 +2009,7 @@ impl<'a> ::buffa::MessageName for FewLargeStringsView<'a> {
 }
 ::buffa::impl_default_view_instance!(FewLargeStringsView);
 ::buffa::impl_view_reborrow!(FewLargeStringsView);
+::buffa::unsafe_impl_view_lifetime_parametric!(FewLargeStringsView);
 /** Self-contained, `'static` owned view of a `FewLargeStrings` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`FewLargeStringsView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2298,6 +2303,7 @@ impl<'a> ::buffa::MessageName for NestL5View<'a> {
 }
 ::buffa::impl_default_view_instance!(NestL5View);
 ::buffa::impl_view_reborrow!(NestL5View);
+::buffa::unsafe_impl_view_lifetime_parametric!(NestL5View);
 /** Self-contained, `'static` owned view of a `NestL5` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`NestL5View`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2538,9 +2544,9 @@ impl<'a> ::buffa::ViewEncode<'a> for NestL4View<'a> {
         if !self.b.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.b) as u64;
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.child.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2563,13 +2569,13 @@ impl<'a> ::buffa::ViewEncode<'a> for NestL4View<'a> {
         if !self.b.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.b, buf);
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.child.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -2614,6 +2620,7 @@ impl<'a> ::buffa::MessageName for NestL4View<'a> {
 }
 ::buffa::impl_default_view_instance!(NestL4View);
 ::buffa::impl_view_reborrow!(NestL4View);
+::buffa::unsafe_impl_view_lifetime_parametric!(NestL4View);
 /** Self-contained, `'static` owned view of a `NestL4` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`NestL4View`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2861,9 +2868,9 @@ impl<'a> ::buffa::ViewEncode<'a> for NestL3View<'a> {
         if !self.b.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.b) as u64;
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.child.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2886,13 +2893,13 @@ impl<'a> ::buffa::ViewEncode<'a> for NestL3View<'a> {
         if !self.b.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.b, buf);
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.child.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -2937,6 +2944,7 @@ impl<'a> ::buffa::MessageName for NestL3View<'a> {
 }
 ::buffa::impl_default_view_instance!(NestL3View);
 ::buffa::impl_view_reborrow!(NestL3View);
+::buffa::unsafe_impl_view_lifetime_parametric!(NestL3View);
 /** Self-contained, `'static` owned view of a `NestL3` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`NestL3View`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -3184,9 +3192,9 @@ impl<'a> ::buffa::ViewEncode<'a> for NestL2View<'a> {
         if !self.b.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.b) as u64;
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.child.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -3209,13 +3217,13 @@ impl<'a> ::buffa::ViewEncode<'a> for NestL2View<'a> {
         if !self.b.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.b, buf);
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.child.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -3260,6 +3268,7 @@ impl<'a> ::buffa::MessageName for NestL2View<'a> {
 }
 ::buffa::impl_default_view_instance!(NestL2View);
 ::buffa::impl_view_reborrow!(NestL2View);
+::buffa::unsafe_impl_view_lifetime_parametric!(NestL2View);
 /** Self-contained, `'static` owned view of a `NestL2` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`NestL2View`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -3507,9 +3516,9 @@ impl<'a> ::buffa::ViewEncode<'a> for NestL1View<'a> {
         if !self.b.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.b) as u64;
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.child.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -3532,13 +3541,13 @@ impl<'a> ::buffa::ViewEncode<'a> for NestL1View<'a> {
         if !self.b.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.b, buf);
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.child.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -3583,6 +3592,7 @@ impl<'a> ::buffa::MessageName for NestL1View<'a> {
 }
 ::buffa::impl_default_view_instance!(NestL1View);
 ::buffa::impl_view_reborrow!(NestL1View);
+::buffa::unsafe_impl_view_lifetime_parametric!(NestL1View);
 /** Self-contained, `'static` owned view of a `NestL1` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`NestL1View`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -3830,9 +3840,9 @@ impl<'a> ::buffa::ViewEncode<'a> for DeepNestedView<'a> {
         if !self.root_b.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.root_b) as u64;
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.child.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -3855,13 +3865,13 @@ impl<'a> ::buffa::ViewEncode<'a> for DeepNestedView<'a> {
         if !self.root_b.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.root_b, buf);
         }
-        if self.child.is_set() {
+        if let ::core::option::Option::Some(__v) = self.child.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.child.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -3906,6 +3916,7 @@ impl<'a> ::buffa::MessageName for DeepNestedView<'a> {
 }
 ::buffa::impl_default_view_instance!(DeepNestedView);
 ::buffa::impl_view_reborrow!(DeepNestedView);
+::buffa::unsafe_impl_view_lifetime_parametric!(DeepNestedView);
 /** Self-contained, `'static` owned view of a `DeepNested` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`DeepNestedView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -4257,9 +4268,10 @@ impl<'__a> ::serde::Serialize for MapDominatedView<'__a> {
                     __s: __S,
                 ) -> ::core::result::Result<__S::Ok, __S::Error> {
                     use ::serde::ser::SerializeMap as _;
+                    let __entries = self.0.iter_unique();
                     let mut __m = __s
-                        .serialize_map(::core::option::Option::Some(self.0.len()))?;
-                    for (k, v) in self.0.iter_unique() {
+                        .serialize_map(::core::option::Option::Some(__entries.len()))?;
+                    for (k, v) in __entries {
                         __m.serialize_entry(k, v)?;
                     }
                     __m.end()
@@ -4278,6 +4290,7 @@ impl<'a> ::buffa::MessageName for MapDominatedView<'a> {
 }
 ::buffa::impl_default_view_instance!(MapDominatedView);
 ::buffa::impl_view_reborrow!(MapDominatedView);
+::buffa::unsafe_impl_view_lifetime_parametric!(MapDominatedView);
 /** Self-contained, `'static` owned view of a `MapDominated` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`MapDominatedView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

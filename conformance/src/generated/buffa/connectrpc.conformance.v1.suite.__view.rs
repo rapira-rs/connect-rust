@@ -616,6 +616,7 @@ impl<'a> ::buffa::MessageName for TestSuiteView<'a> {
 }
 ::buffa::impl_default_view_instance!(TestSuiteView);
 ::buffa::impl_view_reborrow!(TestSuiteView);
+::buffa::unsafe_impl_view_lifetime_parametric!(TestSuiteView);
 /** Self-contained, `'static` owned view of a `TestSuite` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`TestSuiteView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1085,9 +1086,9 @@ impl<'a> ::buffa::ViewEncode<'a> for TestCaseView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.request.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.request.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1101,9 +1102,9 @@ impl<'a> ::buffa::ViewEncode<'a> for TestCaseView<'a> {
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.expected_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.expected_response.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.expected_response.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1128,13 +1129,13 @@ impl<'a> ::buffa::ViewEncode<'a> for TestCaseView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.request.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.request.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.expand_requests {
             ::buffa::types::put_len_delimited_header(
@@ -1144,13 +1145,13 @@ impl<'a> ::buffa::ViewEncode<'a> for TestCaseView<'a> {
             );
             v.write_to(__cache, buf);
         }
-        if self.expected_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.expected_response.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.expected_response.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if !self.other_allowed_error_codes.is_empty() {
             let payload: u64 = self
@@ -1216,6 +1217,7 @@ impl<'a> ::buffa::MessageName for TestCaseView<'a> {
 }
 ::buffa::impl_default_view_instance!(TestCaseView);
 ::buffa::impl_view_reborrow!(TestCaseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(TestCaseView);
 /** Self-contained, `'static` owned view of a `TestCase` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`TestCaseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1558,6 +1560,7 @@ pub mod test_case {
     }
     ::buffa::impl_default_view_instance!(ExpandedSizeView);
     ::buffa::impl_view_reborrow!(ExpandedSizeView);
+    ::buffa::unsafe_impl_view_lifetime_parametric!(ExpandedSizeView);
     /** Self-contained, `'static` owned view of a `ExpandedSize` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ExpandedSizeView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

@@ -506,7 +506,7 @@ impl Router {
     pub fn route_view<H, ReqView>(self, service_name: &str, method_name: &str, handler: H) -> Self
     where
         H: ViewHandler<ReqView>,
-        ReqView: MessageView<'static> + Send + Sync + 'static,
+        ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send + Sync + 'static,
         ReqView::Owned: Message + JsonDeserialize,
     {
         self.route_view_internal(service_name, method_name, handler, false)
@@ -522,7 +522,7 @@ impl Router {
     ) -> Self
     where
         H: ViewHandler<ReqView>,
-        ReqView: MessageView<'static> + Send + Sync + 'static,
+        ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send + Sync + 'static,
         ReqView::Owned: Message + JsonDeserialize,
     {
         self.route_view_internal(service_name, method_name, handler, true)
@@ -538,7 +538,7 @@ impl Router {
     ) -> Self
     where
         H: ViewHandler<ReqView>,
-        ReqView: MessageView<'static> + Send + Sync + 'static,
+        ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send + Sync + 'static,
         ReqView::Owned: Message + JsonDeserialize,
     {
         let path = format!("{service_name}/{method_name}");
@@ -564,7 +564,7 @@ impl Router {
     ) -> Self
     where
         H: ViewStreamingHandler<ReqView, Res>,
-        ReqView: MessageView<'static> + Send + Sync + 'static,
+        ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send + Sync + 'static,
         ReqView::Owned: Message + JsonDeserialize,
         Res: Message + Send + 'static,
     {
@@ -591,7 +591,7 @@ impl Router {
     ) -> Self
     where
         H: ViewClientStreamingHandler<ReqView>,
-        ReqView: MessageView<'static> + Send + Sync + 'static,
+        ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send + Sync + 'static,
         ReqView::Owned: Message + JsonDeserialize,
     {
         let path = format!("{service_name}/{method_name}");
@@ -616,7 +616,7 @@ impl Router {
     ) -> Self
     where
         H: ViewBidiStreamingHandler<ReqView, Res>,
-        ReqView: MessageView<'static> + Send + Sync + 'static,
+        ReqView: MessageView<'static> + buffa::ViewLifetimeParametric + Send + Sync + 'static,
         ReqView::Owned: Message + JsonDeserialize,
         Res: Message + Send + 'static,
     {

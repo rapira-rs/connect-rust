@@ -709,6 +709,7 @@ mod tests {
                     number: Some(1),
                     label: Some(Label::LABEL_OPTIONAL),
                     r#type: Some(Type::TYPE_STRING),
+                    oneof_index: Some(0),
                     ..Default::default()
                 }],
                 oneof_decl: vec![OneofDescriptorProto {

@@ -180,9 +180,9 @@ impl ::buffa::Message for ServerCompatRequest {
                     + ::buffa::types::uint32_encoded_len(self.message_receive_limit)
                         as u64;
         }
-        if self.server_creds.is_set() {
+        if let ::core::option::Option::Some(__v) = self.server_creds.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.server_creds.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -219,13 +219,13 @@ impl ::buffa::Message for ServerCompatRequest {
         if self.message_receive_limit != 0u32 {
             ::buffa::types::put_uint32_field(6u32, self.message_receive_limit, buf);
         }
-        if self.server_creds.is_set() {
+        if let ::core::option::Option::Some(__v) = self.server_creds.as_option() {
             ::buffa::types::put_len_delimited_header(
                 7u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.server_creds.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -317,15 +317,15 @@ impl ::buffa::ExtensionSet for ServerCompatRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ServerCompatRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -499,15 +499,15 @@ impl ::buffa::ExtensionSet for ServerCompatResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ServerCompatResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }

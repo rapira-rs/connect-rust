@@ -218,6 +218,7 @@ impl<'a> ::buffa::MessageName for StatusView<'a> {
 }
 ::buffa::impl_default_view_instance!(StatusView);
 ::buffa::impl_view_reborrow!(StatusView);
+::buffa::unsafe_impl_view_lifetime_parametric!(StatusView);
 /** Self-contained, `'static` owned view of a `Status` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`StatusView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

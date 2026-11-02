@@ -352,6 +352,7 @@ impl<'a> ::buffa::MessageName for ServerReflectionRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(ServerReflectionRequestView);
 ::buffa::impl_view_reborrow!(ServerReflectionRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ServerReflectionRequestView);
 /** Self-contained, `'static` owned view of a `ServerReflectionRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ServerReflectionRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -637,6 +638,7 @@ impl<'a> ::buffa::MessageName for ExtensionRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(ExtensionRequestView);
 ::buffa::impl_view_reborrow!(ExtensionRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ExtensionRequestView);
 /** Self-contained, `'static` owned view of a `ExtensionRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ExtensionRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1053,9 +1055,9 @@ impl<'a> ::buffa::ViewEncode<'a> for ServerReflectionResponseView<'a> {
         if !self.valid_host.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.valid_host) as u64;
         }
-        if self.original_request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.original_request.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.original_request.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1118,13 +1120,13 @@ impl<'a> ::buffa::ViewEncode<'a> for ServerReflectionResponseView<'a> {
         if !self.valid_host.is_empty() {
             ::buffa::types::put_string_field(1u32, &self.valid_host, buf);
         }
-        if self.original_request.is_set() {
+        if let ::core::option::Option::Some(__v) = self.original_request.as_option() {
             ::buffa::types::put_len_delimited_header(
                 2u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.original_request.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if let ::core::option::Option::Some(ref v) = self.message_response {
             match v {
@@ -1234,6 +1236,7 @@ impl<'a> ::buffa::MessageName for ServerReflectionResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ServerReflectionResponseView);
 ::buffa::impl_view_reborrow!(ServerReflectionResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ServerReflectionResponseView);
 /** Self-contained, `'static` owned view of a `ServerReflectionResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ServerReflectionResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1522,6 +1525,7 @@ impl<'a> ::buffa::MessageName for FileDescriptorResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(FileDescriptorResponseView);
 ::buffa::impl_view_reborrow!(FileDescriptorResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(FileDescriptorResponseView);
 /** Self-contained, `'static` owned view of a `FileDescriptorResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`FileDescriptorResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1830,6 +1834,7 @@ impl<'a> ::buffa::MessageName for ExtensionNumberResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ExtensionNumberResponseView);
 ::buffa::impl_view_reborrow!(ExtensionNumberResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ExtensionNumberResponseView);
 /** Self-contained, `'static` owned view of a `ExtensionNumberResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ExtensionNumberResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2121,6 +2126,7 @@ impl<'a> ::buffa::MessageName for ListServiceResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ListServiceResponseView);
 ::buffa::impl_view_reborrow!(ListServiceResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ListServiceResponseView);
 /** Self-contained, `'static` owned view of a `ListServiceResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ListServiceResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2377,6 +2383,7 @@ impl<'a> ::buffa::MessageName for ServiceResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ServiceResponseView);
 ::buffa::impl_view_reborrow!(ServiceResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ServiceResponseView);
 /** Self-contained, `'static` owned view of a `ServiceResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ServiceResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2648,6 +2655,7 @@ impl<'a> ::buffa::MessageName for ErrorResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ErrorResponseView);
 ::buffa::impl_view_reborrow!(ErrorResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ErrorResponseView);
 /** Self-contained, `'static` owned view of a `ErrorResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ErrorResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

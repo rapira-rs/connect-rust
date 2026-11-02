@@ -323,9 +323,10 @@ impl<'__a> ::serde::Serialize for RecordView<'__a> {
                     __s: __S,
                 ) -> ::core::result::Result<__S::Ok, __S::Error> {
                     use ::serde::ser::SerializeMap as _;
+                    let __entries = self.0.iter_unique();
                     let mut __m = __s
-                        .serialize_map(::core::option::Option::Some(self.0.len()))?;
-                    for (k, v) in self.0.iter_unique() {
+                        .serialize_map(::core::option::Option::Some(__entries.len()))?;
+                    for (k, v) in __entries {
                         __m.serialize_entry(k, v)?;
                     }
                     __m.end()
@@ -344,6 +345,7 @@ impl<'a> ::buffa::MessageName for RecordView<'a> {
 }
 ::buffa::impl_default_view_instance!(RecordView);
 ::buffa::impl_view_reborrow!(RecordView);
+::buffa::unsafe_impl_view_lifetime_parametric!(RecordView);
 /** Self-contained, `'static` owned view of a `Record` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`RecordView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

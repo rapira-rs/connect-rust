@@ -131,6 +131,7 @@ impl<'a> ::buffa::MessageName for SayRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(SayRequestView);
 ::buffa::impl_view_reborrow!(SayRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(SayRequestView);
 /** Self-contained, `'static` owned view of a `SayRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`SayRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -377,6 +378,7 @@ impl<'a> ::buffa::MessageName for SayResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(SayResponseView);
 ::buffa::impl_view_reborrow!(SayResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(SayResponseView);
 /** Self-contained, `'static` owned view of a `SayResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`SayResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -624,6 +626,7 @@ impl<'a> ::buffa::MessageName for ConverseRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(ConverseRequestView);
 ::buffa::impl_view_reborrow!(ConverseRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ConverseRequestView);
 /** Self-contained, `'static` owned view of a `ConverseRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ConverseRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -873,6 +876,7 @@ impl<'a> ::buffa::MessageName for ConverseResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(ConverseResponseView);
 ::buffa::impl_view_reborrow!(ConverseResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ConverseResponseView);
 /** Self-contained, `'static` owned view of a `ConverseResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ConverseResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1121,6 +1125,7 @@ impl<'a> ::buffa::MessageName for IntroduceRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(IntroduceRequestView);
 ::buffa::impl_view_reborrow!(IntroduceRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(IntroduceRequestView);
 /** Self-contained, `'static` owned view of a `IntroduceRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`IntroduceRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1369,6 +1374,7 @@ impl<'a> ::buffa::MessageName for IntroduceResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(IntroduceResponseView);
 ::buffa::impl_view_reborrow!(IntroduceResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(IntroduceResponseView);
 /** Self-contained, `'static` owned view of a `IntroduceResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`IntroduceResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

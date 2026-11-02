@@ -111,6 +111,7 @@ impl<'a> ::buffa::MessageName for GetFortunesRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(GetFortunesRequestView);
 ::buffa::impl_view_reborrow!(GetFortunesRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(GetFortunesRequestView);
 /** Self-contained, `'static` owned view of a `GetFortunesRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`GetFortunesRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -389,6 +390,7 @@ impl<'a> ::buffa::MessageName for GetFortunesResponseView<'a> {
 }
 ::buffa::impl_default_view_instance!(GetFortunesResponseView);
 ::buffa::impl_view_reborrow!(GetFortunesResponseView);
+::buffa::unsafe_impl_view_lifetime_parametric!(GetFortunesResponseView);
 /** Self-contained, `'static` owned view of a `GetFortunesResponse` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`GetFortunesResponseView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -659,6 +661,7 @@ impl<'a> ::buffa::MessageName for FortuneView<'a> {
 }
 ::buffa::impl_default_view_instance!(FortuneView);
 ::buffa::impl_view_reborrow!(FortuneView);
+::buffa::unsafe_impl_view_lifetime_parametric!(FortuneView);
 /** Self-contained, `'static` owned view of a `Fortune` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`FortuneView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

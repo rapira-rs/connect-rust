@@ -150,10 +150,7 @@ jobs:
     name: Check generated code
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    # The buffa plugins are built from the release tag matching the version in
-    # the committed Cargo.lock, so this job only changes behaviour when a PR
-    # bumps the lockfile — and such a PR must carry the regenerated code
-    # (`task generate:all`) with it.
+    # Build the generator from the revision used by the runtime.
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -168,32 +165,12 @@ jobs:
           # Pinned so the job's behaviour does not drift with new buf
           # releases; keep in sync with the version used for local
           # regeneration when bumping.
-          version: 1.69.0
+          version: 1.73.0
       - uses: go-task/setup-task@01a4adf9db2d14c1de7a560f09170b6e0df736aa # v2 (sha-pinned)
-      - name: Resolve locked buffa version
-        id: buffa-version
-        shell: bash
-        run: |
-          version="$(awk '
-            $0 == "[[package]]" { in_buffa = 0 }
-            $0 == "name = \"buffa\"" { in_buffa = 1 }
-            in_buffa && $1 == "version" {
-              gsub(/"/, "", $3)
-              print $3
-              exit
-            }
-          ' Cargo.lock)"
-
-          if [ -z "$version" ]; then
-            echo "::error::Could not find the buffa package version in Cargo.lock"
-            exit 1
-          fi
-
-          echo "version=$version" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
         with:
           repository: anthropics/buffa
-          ref: v${{ steps.buffa-version.outputs.version }}
+          ref: 104716922c66e21cf26895a2a5a2a42e6292f9d4
           path: buffa
       - name: Link buffa sibling checkout
         shell: bash

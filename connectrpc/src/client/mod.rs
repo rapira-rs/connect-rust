@@ -1952,7 +1952,7 @@ impl<Resp> UnaryResponse<Resp> {
 /// [`OwnedView`]. Generated unary client methods always return this shape.
 impl<V> UnaryResponse<OwnedView<V>>
 where
-    V: MessageView<'static>,
+    V: ViewReborrow,
 {
     /// Consume the response and return the fully-owned message, discarding
     /// headers and trailers.
@@ -2056,7 +2056,7 @@ fn decode_response_view<RespView>(
     options: &buffa::DecodeOptions,
 ) -> Result<OwnedView<RespView>, ConnectError>
 where
-    RespView: MessageView<'static> + Send,
+    RespView: MessageView<'static> + buffa::ViewLifetimeParametric + Send,
     RespView::Owned: buffa::Message + crate::codec::JsonDeserialize,
 {
     match format {
@@ -2123,7 +2123,7 @@ where
     T: ClientTransport,
     <T::ResponseBody as Body>::Error: Into<Box<dyn std::error::Error + Send + Sync>>,
     Req: buffa::Message + crate::codec::JsonSerialize,
-    RespView: MessageView<'static> + Send,
+    RespView: MessageView<'static> + buffa::ViewLifetimeParametric + Send,
     RespView::Owned: buffa::Message + crate::codec::JsonDeserialize,
 {
     check_client_spec(spec, StreamType::Unary, "call_unary")?;
@@ -2258,7 +2258,7 @@ where
     T: ClientTransport,
     <T::ResponseBody as Body>::Error: Into<Box<dyn std::error::Error + Send + Sync>>,
     Req: buffa::Message + crate::codec::JsonSerialize,
-    RespView: MessageView<'static> + Send,
+    RespView: MessageView<'static> + buffa::ViewLifetimeParametric + Send,
     RespView::Owned: buffa::Message + crate::codec::JsonDeserialize,
 {
     check_client_spec(spec, StreamType::Unary, "call_unary_get")?;
@@ -2447,7 +2447,7 @@ async fn parse_connect_unary_response<B, RespView>(
 where
     B: Body<Data = Bytes> + Send,
     B::Error: Into<Box<dyn std::error::Error + Send + Sync>>,
-    RespView: MessageView<'static> + Send,
+    RespView: MessageView<'static> + buffa::ViewLifetimeParametric + Send,
     RespView::Owned: buffa::Message + crate::codec::JsonDeserialize,
 {
     let status = response.status();
@@ -2619,7 +2619,7 @@ async fn parse_grpc_unary_response<B, RespView>(
 where
     B: Body<Data = Bytes> + Send,
     B::Error: Into<Box<dyn std::error::Error + Send + Sync>>,
-    RespView: MessageView<'static> + Send,
+    RespView: MessageView<'static> + buffa::ViewLifetimeParametric + Send,
     RespView::Owned: buffa::Message + crate::codec::JsonDeserialize,
 {
     let status = response.status();
@@ -3238,7 +3238,7 @@ where
         // directly) so the future stays `Send` for concrete generated view
         // types: projecting through the GAT in the bound trips rustc's
         // coroutine-witness auto-trait check (#214).
-        RespView: MessageView<'static, Owned = M>,
+        RespView: MessageView<'static, Owned = M> + buffa::ViewLifetimeParametric,
         M: HasMessageView<View<'static> = RespView>,
     {
         // The outcome is immutable once reported: replay the terminal
@@ -3265,7 +3265,10 @@ where
     /// decode/transport/deadline errors lift into a `StreamEnd` via
     /// `From`. There is deliberately no way to exit this loop without
     /// producing the terminal record.
-    async fn next_message_or_end(&mut self) -> Result<OwnedView<RespView>, StreamEnd> {
+    async fn next_message_or_end(&mut self) -> Result<OwnedView<RespView>, StreamEnd>
+    where
+        RespView: buffa::ViewLifetimeParametric,
+    {
         loop {
             let Some(envelope) = self.assembler.feed(&mut self.frame)? else {
                 debug_assert!(
@@ -4109,7 +4112,7 @@ where
         // `'static` because response-side construction is retained in a
         // spawned task while the caller's `message()` future may be dropped.
         B: 'static,
-        RespView: MessageView<'static, Owned = M> + 'static,
+        RespView: MessageView<'static, Owned = M> + buffa::ViewLifetimeParametric + 'static,
         M: HasMessageView<View<'static> = RespView>,
     {
         loop {
@@ -4316,7 +4319,7 @@ where
     pub async fn message<M>(&mut self) -> Result<Option<crate::StreamMessage<M>>, ConnectError>
     where
         B: 'static,
-        RespView: MessageView<'static, Owned = M> + 'static,
+        RespView: MessageView<'static, Owned = M> + buffa::ViewLifetimeParametric + 'static,
         M: HasMessageView<View<'static> = RespView>,
     {
         self.recv.message().await
@@ -4524,7 +4527,7 @@ where
     T: ClientTransport,
     <T::ResponseBody as Body>::Error: Into<Box<dyn std::error::Error + Send + Sync>>,
     Req: buffa::Message + crate::codec::JsonSerialize,
-    RespView: MessageView<'static> + Send,
+    RespView: MessageView<'static> + buffa::ViewLifetimeParametric + Send,
     RespView::Owned: buffa::Message + crate::codec::JsonDeserialize,
 {
     check_client_spec(spec, StreamType::ClientStream, "call_client_stream")?;
@@ -4631,7 +4634,7 @@ async fn parse_connect_client_stream_response<B, RespView>(
 where
     B: Body<Data = Bytes> + Send,
     B::Error: Into<Box<dyn std::error::Error + Send + Sync>>,
-    RespView: MessageView<'static> + Send,
+    RespView: MessageView<'static> + buffa::ViewLifetimeParametric + Send,
     RespView::Owned: buffa::Message + crate::codec::JsonDeserialize,
 {
     let status = response.status();

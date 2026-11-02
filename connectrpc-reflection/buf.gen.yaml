@@ -1,16 +1,7 @@
-# Code generation configuration for connectrpc-reflection.
-#
-# The grpc.reflection.v1 / v1alpha protos are pulled from the public Buf
-# Schema Registry (the canonical gRPC module) rather than vendored — the
-# generated code and descriptor/reflection.fds.bin are checked in, so the
-# registry is only needed at regeneration time:
-#   task connectrpc-reflection:generate
+# Generate the reflection types from the stored descriptor set.
 version: v2
 inputs:
-  - module: buf.build/grpc/grpc
-    paths:
-      - grpc/reflection/v1
-      - grpc/reflection/v1alpha
+  - binary_image: descriptor/reflection.fds.bin
 plugins:
   - local: ../../buffa/target/release/protoc-gen-buffa
     out: src/generated/buffa

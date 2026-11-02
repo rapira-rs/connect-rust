@@ -274,9 +274,10 @@ impl<'__a> ::serde::Serialize for ErrorInfoView<'__a> {
                     __s: __S,
                 ) -> ::core::result::Result<__S::Ok, __S::Error> {
                     use ::serde::ser::SerializeMap as _;
+                    let __entries = self.0.iter_unique();
                     let mut __m = __s
-                        .serialize_map(::core::option::Option::Some(self.0.len()))?;
-                    for (k, v) in self.0.iter_unique() {
+                        .serialize_map(::core::option::Option::Some(__entries.len()))?;
+                    for (k, v) in __entries {
                         __m.serialize_entry(k, v)?;
                     }
                     __m.end()
@@ -295,6 +296,7 @@ impl<'a> ::buffa::MessageName for ErrorInfoView<'a> {
 }
 ::buffa::impl_default_view_instance!(ErrorInfoView);
 ::buffa::impl_view_reborrow!(ErrorInfoView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ErrorInfoView);
 /** Self-contained, `'static` owned view of a `ErrorInfo` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ErrorInfoView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -561,9 +563,9 @@ impl<'a> ::buffa::ViewEncode<'a> for RetryInfoView<'a> {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.retry_delay.is_set() {
+        if let ::core::option::Option::Some(__v) = self.retry_delay.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.retry_delay.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -580,13 +582,13 @@ impl<'a> ::buffa::ViewEncode<'a> for RetryInfoView<'a> {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.retry_delay.is_set() {
+        if let ::core::option::Option::Some(__v) = self.retry_delay.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.retry_delay.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -626,6 +628,7 @@ impl<'a> ::buffa::MessageName for RetryInfoView<'a> {
 }
 ::buffa::impl_default_view_instance!(RetryInfoView);
 ::buffa::impl_view_reborrow!(RetryInfoView);
+::buffa::unsafe_impl_view_lifetime_parametric!(RetryInfoView);
 /** Self-contained, `'static` owned view of a `RetryInfo` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`RetryInfoView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -907,6 +910,7 @@ impl<'a> ::buffa::MessageName for DebugInfoView<'a> {
 }
 ::buffa::impl_default_view_instance!(DebugInfoView);
 ::buffa::impl_view_reborrow!(DebugInfoView);
+::buffa::unsafe_impl_view_lifetime_parametric!(DebugInfoView);
 /** Self-contained, `'static` owned view of a `DebugInfo` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`DebugInfoView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1206,6 +1210,7 @@ impl<'a> ::buffa::MessageName for QuotaFailureView<'a> {
 }
 ::buffa::impl_default_view_instance!(QuotaFailureView);
 ::buffa::impl_view_reborrow!(QuotaFailureView);
+::buffa::unsafe_impl_view_lifetime_parametric!(QuotaFailureView);
 /** Self-contained, `'static` owned view of a `QuotaFailure` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`QuotaFailureView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -1738,9 +1743,12 @@ pub mod quota_failure {
                         __s: __S,
                     ) -> ::core::result::Result<__S::Ok, __S::Error> {
                         use ::serde::ser::SerializeMap as _;
+                        let __entries = self.0.iter_unique();
                         let mut __m = __s
-                            .serialize_map(::core::option::Option::Some(self.0.len()))?;
-                        for (k, v) in self.0.iter_unique() {
+                            .serialize_map(
+                                ::core::option::Option::Some(__entries.len()),
+                            )?;
+                        for (k, v) in __entries {
                             __m.serialize_entry(k, v)?;
                         }
                         __m.end()
@@ -1773,6 +1781,7 @@ pub mod quota_failure {
     }
     ::buffa::impl_default_view_instance!(ViolationView);
     ::buffa::impl_view_reborrow!(ViolationView);
+    ::buffa::unsafe_impl_view_lifetime_parametric!(ViolationView);
     /** Self-contained, `'static` owned view of a `Violation` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ViolationView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2170,6 +2179,7 @@ impl<'a> ::buffa::MessageName for PreconditionFailureView<'a> {
 }
 ::buffa::impl_default_view_instance!(PreconditionFailureView);
 ::buffa::impl_view_reborrow!(PreconditionFailureView);
+::buffa::unsafe_impl_view_lifetime_parametric!(PreconditionFailureView);
 /** Self-contained, `'static` owned view of a `PreconditionFailure` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`PreconditionFailureView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2493,6 +2503,7 @@ pub mod precondition_failure {
     }
     ::buffa::impl_default_view_instance!(ViolationView);
     ::buffa::impl_view_reborrow!(ViolationView);
+    ::buffa::unsafe_impl_view_lifetime_parametric!(ViolationView);
     /** Self-contained, `'static` owned view of a `Violation` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ViolationView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -2801,6 +2812,7 @@ impl<'a> ::buffa::MessageName for BadRequestView<'a> {
 }
 ::buffa::impl_default_view_instance!(BadRequestView);
 ::buffa::impl_view_reborrow!(BadRequestView);
+::buffa::unsafe_impl_view_lifetime_parametric!(BadRequestView);
 /** Self-contained, `'static` owned view of a `BadRequest` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`BadRequestView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -3135,9 +3147,10 @@ pub mod bad_request {
             if !self.reason.is_empty() {
                 size += 1u64 + ::buffa::types::string_encoded_len(&self.reason) as u64;
             }
-            if self.localized_message.is_set() {
+            if let ::core::option::Option::Some(__v) = self.localized_message.as_option()
+            {
                 let __slot = __cache.reserve();
-                let inner_size = self.localized_message.compute_size(__cache);
+                let inner_size = __v.compute_size(__cache);
                 __cache.set(__slot, inner_size);
                 size
                     += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -3163,13 +3176,14 @@ pub mod bad_request {
             if !self.reason.is_empty() {
                 ::buffa::types::put_string_field(3u32, &self.reason, buf);
             }
-            if self.localized_message.is_set() {
+            if let ::core::option::Option::Some(__v) = self.localized_message.as_option()
+            {
                 ::buffa::types::put_len_delimited_header(
                     4u32,
                     u64::from(__cache.consume_next()),
                     buf,
                 );
-                self.localized_message.write_to(__cache, buf);
+                __v.write_to(__cache, buf);
             }
             self.__buffa_unknown_fields.write_to(buf);
         }
@@ -3221,6 +3235,7 @@ pub mod bad_request {
     }
     ::buffa::impl_default_view_instance!(FieldViolationView);
     ::buffa::impl_view_reborrow!(FieldViolationView);
+    ::buffa::unsafe_impl_view_lifetime_parametric!(FieldViolationView);
     /** Self-contained, `'static` owned view of a `FieldViolation` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`FieldViolationView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -3571,6 +3586,7 @@ impl<'a> ::buffa::MessageName for RequestInfoView<'a> {
 }
 ::buffa::impl_default_view_instance!(RequestInfoView);
 ::buffa::impl_view_reborrow!(RequestInfoView);
+::buffa::unsafe_impl_view_lifetime_parametric!(RequestInfoView);
 /** Self-contained, `'static` owned view of a `RequestInfo` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`RequestInfoView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -3906,6 +3922,7 @@ impl<'a> ::buffa::MessageName for ResourceInfoView<'a> {
 }
 ::buffa::impl_default_view_instance!(ResourceInfoView);
 ::buffa::impl_view_reborrow!(ResourceInfoView);
+::buffa::unsafe_impl_view_lifetime_parametric!(ResourceInfoView);
 /** Self-contained, `'static` owned view of a `ResourceInfo` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`ResourceInfoView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -4220,6 +4237,7 @@ impl<'a> ::buffa::MessageName for HelpView<'a> {
 }
 ::buffa::impl_default_view_instance!(HelpView);
 ::buffa::impl_view_reborrow!(HelpView);
+::buffa::unsafe_impl_view_lifetime_parametric!(HelpView);
 /** Self-contained, `'static` owned view of a `Help` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`HelpView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -4501,6 +4519,7 @@ pub mod help {
     }
     ::buffa::impl_default_view_instance!(LinkView);
     ::buffa::impl_view_reborrow!(LinkView);
+    ::buffa::unsafe_impl_view_lifetime_parametric!(LinkView);
     /** Self-contained, `'static` owned view of a `Link` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`LinkView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.
@@ -4781,6 +4800,7 @@ impl<'a> ::buffa::MessageName for LocalizedMessageView<'a> {
 }
 ::buffa::impl_default_view_instance!(LocalizedMessageView);
 ::buffa::impl_view_reborrow!(LocalizedMessageView);
+::buffa::unsafe_impl_view_lifetime_parametric!(LocalizedMessageView);
 /** Self-contained, `'static` owned view of a `LocalizedMessage` message.
 
  Wraps [`::buffa::OwnedView`]`<`[`LocalizedMessageView`]`<'static>>`: the decoded view and the [`::buffa::bytes::Bytes`] buffer it borrows from travel together, so the handle is `'static` and `Send + Sync` — suitable for async handlers, spawned tasks, and anywhere a `'static` bound is required.

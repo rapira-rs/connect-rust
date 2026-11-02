@@ -45,10 +45,9 @@ async-trait = { workspace = true }
 # buffa change std-gating a core path we rely on. `fast-utf8` is kept
 # explicitly for the same reason: it is in buffa's default set (validated
 # string decoding on the hot path), and `default-features = false` would
-# silently drop it. Keep the version in sync with the
-# `[workspace.dependencies]` `buffa` entry, which documents why the floor is
-# where it is.
-buffa = { version = "0.9.2", default-features = false, features = ["std", "fast-utf8"] }
+# silently drop it. Keep the revision in sync with the
+# `[workspace.dependencies]` `buffa` entry.
+buffa = { git = "https://github.com/anthropics/buffa", rev = "104716922c66e21cf26895a2a5a2a42e6292f9d4", version = "0.9.2", default-features = false, features = ["std", "fast-utf8"] }
 
 # Serialization. Non-optional even in proto-only builds: the Connect error and
 # streaming end-of-stream wire frames are always JSON regardless of the message

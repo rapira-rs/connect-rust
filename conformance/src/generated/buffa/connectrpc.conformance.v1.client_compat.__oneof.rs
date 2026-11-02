@@ -21,16 +21,17 @@ pub mod client_compat_request {
             AfterNumResponses(u32),
         }
         impl ::buffa::Oneof for CancelTiming {}
-        impl From<::buffa_types::google::protobuf::Empty> for CancelTiming {
+        impl ::core::convert::From<::buffa_types::google::protobuf::Empty>
+        for CancelTiming {
             fn from(v: ::buffa_types::google::protobuf::Empty) -> Self {
                 Self::BeforeCloseSend(::buffa::alloc::boxed::Box::new(v))
             }
         }
         impl ::serde::Serialize for CancelTiming {
-            fn serialize<S: ::serde::Serializer>(
+            fn serialize<__S: ::serde::Serializer>(
                 &self,
-                s: S,
-            ) -> ::core::result::Result<S::Ok, S::Error> {
+                s: __S,
+            ) -> ::core::result::Result<__S::Ok, __S::Error> {
                 use ::serde::ser::SerializeMap;
                 let mut map = s.serialize_map(Some(1))?;
                 match self {
@@ -73,33 +74,33 @@ pub mod client_compat_response {
         Error(::buffa::alloc::boxed::Box<super::super::super::ClientErrorResult>),
     }
     impl ::buffa::Oneof for Result {}
-    impl From<super::super::super::ClientResponseResult> for Result {
+    impl ::core::convert::From<super::super::super::ClientResponseResult> for Result {
         fn from(v: super::super::super::ClientResponseResult) -> Self {
             Self::Response(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::ClientResponseResult>
+    impl ::core::convert::From<super::super::super::ClientResponseResult>
     for ::core::option::Option<Result> {
         fn from(v: super::super::super::ClientResponseResult) -> Self {
             Self::Some(Result::from(v))
         }
     }
-    impl From<super::super::super::ClientErrorResult> for Result {
+    impl ::core::convert::From<super::super::super::ClientErrorResult> for Result {
         fn from(v: super::super::super::ClientErrorResult) -> Self {
             Self::Error(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::ClientErrorResult>
+    impl ::core::convert::From<super::super::super::ClientErrorResult>
     for ::core::option::Option<Result> {
         fn from(v: super::super::super::ClientErrorResult) -> Self {
             Self::Some(Result::from(v))
         }
     }
     impl ::serde::Serialize for Result {
-        fn serialize<S: ::serde::Serializer>(
+        fn serialize<__S: ::serde::Serializer>(
             &self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             use ::serde::ser::SerializeMap;
             let mut map = s.serialize_map(Some(1))?;
             match self {

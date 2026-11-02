@@ -10,21 +10,22 @@ pub mod unary_response_definition {
         Error(::buffa::alloc::boxed::Box<super::super::super::Error>),
     }
     impl ::buffa::Oneof for Response {}
-    impl From<super::super::super::Error> for Response {
+    impl ::core::convert::From<super::super::super::Error> for Response {
         fn from(v: super::super::super::Error) -> Self {
             Self::Error(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::Error> for ::core::option::Option<Response> {
+    impl ::core::convert::From<super::super::super::Error>
+    for ::core::option::Option<Response> {
         fn from(v: super::super::super::Error) -> Self {
             Self::Some(Response::from(v))
         }
     }
     impl ::serde::Serialize for Response {
-        fn serialize<S: ::serde::Serializer>(
+        fn serialize<__S: ::serde::Serializer>(
             &self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             use ::serde::ser::SerializeMap;
             let mut map = s.serialize_map(Some(1))?;
             match self {
@@ -51,31 +52,33 @@ pub mod raw_http_request {
         Stream(::buffa::alloc::boxed::Box<super::super::super::StreamContents>),
     }
     impl ::buffa::Oneof for Body {}
-    impl From<super::super::super::MessageContents> for Body {
+    impl ::core::convert::From<super::super::super::MessageContents> for Body {
         fn from(v: super::super::super::MessageContents) -> Self {
             Self::Unary(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::MessageContents> for ::core::option::Option<Body> {
+    impl ::core::convert::From<super::super::super::MessageContents>
+    for ::core::option::Option<Body> {
         fn from(v: super::super::super::MessageContents) -> Self {
             Self::Some(Body::from(v))
         }
     }
-    impl From<super::super::super::StreamContents> for Body {
+    impl ::core::convert::From<super::super::super::StreamContents> for Body {
         fn from(v: super::super::super::StreamContents) -> Self {
             Self::Stream(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::StreamContents> for ::core::option::Option<Body> {
+    impl ::core::convert::From<super::super::super::StreamContents>
+    for ::core::option::Option<Body> {
         fn from(v: super::super::super::StreamContents) -> Self {
             Self::Some(Body::from(v))
         }
     }
     impl ::serde::Serialize for Body {
-        fn serialize<S: ::serde::Serializer>(
+        fn serialize<__S: ::serde::Serializer>(
             &self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             use ::serde::ser::SerializeMap;
             let mut map = s.serialize_map(Some(1))?;
             match self {
@@ -101,16 +104,16 @@ pub mod message_contents {
         BinaryMessage(::buffa::alloc::boxed::Box<::buffa_types::google::protobuf::Any>),
     }
     impl ::buffa::Oneof for Data {}
-    impl From<::buffa_types::google::protobuf::Any> for Data {
+    impl ::core::convert::From<::buffa_types::google::protobuf::Any> for Data {
         fn from(v: ::buffa_types::google::protobuf::Any) -> Self {
             Self::BinaryMessage(::buffa::alloc::boxed::Box::new(v))
         }
     }
     impl ::serde::Serialize for Data {
-        fn serialize<S: ::serde::Serializer>(
+        fn serialize<__S: ::serde::Serializer>(
             &self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             use ::serde::ser::SerializeMap;
             let mut map = s.serialize_map(Some(1))?;
             match self {
@@ -137,31 +140,33 @@ pub mod raw_http_response {
         Stream(::buffa::alloc::boxed::Box<super::super::super::StreamContents>),
     }
     impl ::buffa::Oneof for Body {}
-    impl From<super::super::super::MessageContents> for Body {
+    impl ::core::convert::From<super::super::super::MessageContents> for Body {
         fn from(v: super::super::super::MessageContents) -> Self {
             Self::Unary(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::MessageContents> for ::core::option::Option<Body> {
+    impl ::core::convert::From<super::super::super::MessageContents>
+    for ::core::option::Option<Body> {
         fn from(v: super::super::super::MessageContents) -> Self {
             Self::Some(Body::from(v))
         }
     }
-    impl From<super::super::super::StreamContents> for Body {
+    impl ::core::convert::From<super::super::super::StreamContents> for Body {
         fn from(v: super::super::super::StreamContents) -> Self {
             Self::Stream(::buffa::alloc::boxed::Box::new(v))
         }
     }
-    impl From<super::super::super::StreamContents> for ::core::option::Option<Body> {
+    impl ::core::convert::From<super::super::super::StreamContents>
+    for ::core::option::Option<Body> {
         fn from(v: super::super::super::StreamContents) -> Self {
             Self::Some(Body::from(v))
         }
     }
     impl ::serde::Serialize for Body {
-        fn serialize<S: ::serde::Serializer>(
+        fn serialize<__S: ::serde::Serializer>(
             &self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             use ::serde::ser::SerializeMap;
             let mut map = s.serialize_map(Some(1))?;
             match self {

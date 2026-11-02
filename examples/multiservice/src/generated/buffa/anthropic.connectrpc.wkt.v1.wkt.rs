@@ -135,17 +135,17 @@ impl ::buffa::Message for CreateEventRequest {
         if !self.name.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.name) as u64;
         }
-        if self.occurred_at.is_set() {
+        if let ::core::option::Option::Some(__v) = self.occurred_at.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.occurred_at.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.duration.is_set() {
+        if let ::core::option::Option::Some(__v) = self.duration.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.duration.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -164,21 +164,21 @@ impl ::buffa::Message for CreateEventRequest {
         if !self.name.is_empty() {
             ::buffa::types::put_string_field(1u32, &self.name, buf);
         }
-        if self.occurred_at.is_set() {
+        if let ::core::option::Option::Some(__v) = self.occurred_at.as_option() {
             ::buffa::types::put_len_delimited_header(
                 2u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.occurred_at.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
-        if self.duration.is_set() {
+        if let ::core::option::Option::Some(__v) = self.duration.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.duration.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -246,15 +246,15 @@ impl ::buffa::ExtensionSet for CreateEventRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for CreateEventRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -368,9 +368,9 @@ impl ::buffa::Message for CreateEventResponse {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.event.is_set() {
+        if let ::core::option::Option::Some(__v) = self.event.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.event.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -386,13 +386,13 @@ impl ::buffa::Message for CreateEventResponse {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.event.is_set() {
+        if let ::core::option::Option::Some(__v) = self.event.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.event.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -440,15 +440,15 @@ impl ::buffa::ExtensionSet for CreateEventResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for CreateEventResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -619,25 +619,25 @@ impl ::buffa::Message for Event {
         if !self.name.is_empty() {
             size += 1u64 + ::buffa::types::string_encoded_len(&self.name) as u64;
         }
-        if self.occurred_at.is_set() {
+        if let ::core::option::Option::Some(__v) = self.occurred_at.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.occurred_at.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.duration.is_set() {
+        if let ::core::option::Option::Some(__v) = self.duration.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.duration.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.created_at.is_set() {
+        if let ::core::option::Option::Some(__v) = self.created_at.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.created_at.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -659,29 +659,29 @@ impl ::buffa::Message for Event {
         if !self.name.is_empty() {
             ::buffa::types::put_string_field(2u32, &self.name, buf);
         }
-        if self.occurred_at.is_set() {
+        if let ::core::option::Option::Some(__v) = self.occurred_at.as_option() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.occurred_at.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
-        if self.duration.is_set() {
+        if let ::core::option::Option::Some(__v) = self.duration.as_option() {
             ::buffa::types::put_len_delimited_header(
                 4u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.duration.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
-        if self.created_at.is_set() {
+        if let ::core::option::Option::Some(__v) = self.created_at.as_option() {
             ::buffa::types::put_len_delimited_header(
                 5u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.created_at.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -769,15 +769,15 @@ impl ::buffa::ExtensionSet for Event {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for Event {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -908,17 +908,17 @@ impl ::buffa::Message for CalculateDurationRequest {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.start.is_set() {
+        if let ::core::option::Option::Some(__v) = self.start.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.start.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.end.is_set() {
+        if let ::core::option::Option::Some(__v) = self.end.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.end.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -934,21 +934,21 @@ impl ::buffa::Message for CalculateDurationRequest {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.start.is_set() {
+        if let ::core::option::Option::Some(__v) = self.start.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.start.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
-        if self.end.is_set() {
+        if let ::core::option::Option::Some(__v) = self.end.as_option() {
             ::buffa::types::put_len_delimited_header(
                 2u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.end.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -1008,15 +1008,15 @@ impl ::buffa::ExtensionSet for CalculateDurationRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for CalculateDurationRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1135,9 +1135,9 @@ impl ::buffa::Message for CalculateDurationResponse {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.duration.is_set() {
+        if let ::core::option::Option::Some(__v) = self.duration.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.duration.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1153,13 +1153,13 @@ impl ::buffa::Message for CalculateDurationResponse {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.duration.is_set() {
+        if let ::core::option::Option::Some(__v) = self.duration.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.duration.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -1207,15 +1207,15 @@ impl ::buffa::ExtensionSet for CalculateDurationResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for CalculateDurationResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1334,9 +1334,9 @@ impl ::buffa::Message for ProcessMetadataRequest {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.metadata.is_set() {
+        if let ::core::option::Option::Some(__v) = self.metadata.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.metadata.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1352,13 +1352,13 @@ impl ::buffa::Message for ProcessMetadataRequest {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.metadata.is_set() {
+        if let ::core::option::Option::Some(__v) = self.metadata.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.metadata.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -1406,15 +1406,15 @@ impl ::buffa::ExtensionSet for ProcessMetadataRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ProcessMetadataRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1544,9 +1544,9 @@ impl ::buffa::Message for ProcessMetadataResponse {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.metadata.is_set() {
+        if let ::core::option::Option::Some(__v) = self.metadata.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.metadata.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1565,13 +1565,13 @@ impl ::buffa::Message for ProcessMetadataResponse {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.metadata.is_set() {
+        if let ::core::option::Option::Some(__v) = self.metadata.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.metadata.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if self.field_count != 0i32 {
             ::buffa::types::put_int32_field(2u32, self.field_count, buf);
@@ -1630,15 +1630,15 @@ impl ::buffa::ExtensionSet for ProcessMetadataResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ProcessMetadataResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }

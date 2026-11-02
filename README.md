@@ -34,6 +34,8 @@ The runtime is built on [`tower::Service`](https://docs.rs/tower/latest/tower/tr
 
 ## Quick Start
 
+This fork uses the `fix/buffa-json-limits` branch of `rapira-rs/connect-rust`. Use Buffa revision `104716922c66e21cf26895a2a5a2a42e6292f9d4` for the runtime and code generator.
+
 ### Define your service
 
 ```protobuf
@@ -69,60 +71,14 @@ codegen plugins are invoked per-file; only the packaging plugin needs
 
 ##### Installing the plugins
 
-`protoc-gen-buffa` and `protoc-gen-buffa-packaging` ship from the
-[`buffa`](https://github.com/anthropics/buffa) repo - see its release
-page for binaries or `cargo install`.
-
-For `protoc-gen-connect-rust`, three options:
-
-**1. Download a pre-built binary from the GitHub release.** Releases
-ship Linux (x86_64, aarch64), macOS (x86_64, aarch64), and Windows
-(x86_64) binaries, each with a SHA-256 checksum, a Sigstore signature
-(`.sig` + `.pem`), and a GitHub-native build provenance attestation.
+Install the plugins from the same sources as the runtime:
 
 ```sh
-VERSION=v0.9.0
-PLATFORM=linux-x86_64        # or darwin-aarch64, etc.
-BASE=https://github.com/connectrpc/connect-rust/releases/download/${VERSION}
-BIN=protoc-gen-connect-rust-${VERSION}-${PLATFORM}
-
-curl -fSL -o "${BIN}"        "${BASE}/${BIN}"
-curl -fSL -o "${BIN}.sig"    "${BASE}/${BIN}.sig"
-curl -fSL -o "${BIN}.pem"    "${BASE}/${BIN}.pem"
-curl -fSL -o checksums-sha256.txt "${BASE}/checksums-sha256.txt"
-
-# Verify the checksum.
-grep " ${BIN}\$" checksums-sha256.txt | sha256sum -c -
-
-# Verify the GitHub-native attestation (no .sig/.pem download needed).
-gh attestation verify "${BIN}" --repo connectrpc/connect-rust
-
-# Or verify the cosign signature directly.
-cosign verify-blob \
-  --certificate "${BIN}.pem" \
-  --signature "${BIN}.sig" \
-  --certificate-identity "https://github.com/connectrpc/connect-rust/.github/workflows/release.yml@refs/tags/${VERSION}" \
-  --certificate-oidc-issuer "https://token.actions.githubusercontent.com" \
-  "${BIN}"
-
-install -m 0755 "${BIN}" /usr/local/bin/protoc-gen-connect-rust
+cargo install --locked --git https://github.com/anthropics/buffa --rev 104716922c66e21cf26895a2a5a2a42e6292f9d4 protoc-gen-buffa protoc-gen-buffa-packaging
+cargo install --locked --git https://github.com/rapira-rs/connect-rust --branch fix/buffa-json-limits connectrpc-codegen
 ```
 
-**2. Build from source via cargo.** Pulls the latest published
-`connectrpc-codegen` crate from crates.io and installs the binary into
-`$CARGO_HOME/bin`:
-
-```sh
-cargo install --locked connectrpc-codegen
-```
-
-**3. Buf Schema Registry remote plugin.** The plugin is published on the
-Buf Schema Registry as
-[`buf.build/connectrpc/rust`](https://buf.build/connectrpc/rust), with
-versions tracking connect-rust releases. No local install of
-`protoc-gen-connect-rust` is needed: replace the
-`local: protoc-gen-connect-rust` entry below with
-`remote: buf.build/connectrpc/rust:v0.9.0`.
+Generate the message types and service stubs with these plugins. The generated views must implement `ViewLifetimeParametric` for the runtime to retain them in an `OwnedView`.
 
 ```yaml
 # buf.gen.yaml
@@ -159,14 +115,7 @@ second packaging invocation uses `filter=services` so the connect tree's
 `mod.rs` only `include!`s files that actually have service stubs in them.
 Changing the mount point requires regenerating.
 
-> The underlying option is `extern_path=.=crate::proto` - same format the
-> Buf Schema Registry uses when generating Cargo SDKs. `buffa_module=X`
-> is shorthand for the `.` catch-all case. Any module an `extern_path`
-> points at must be buffa-generated code from buffa 0.9.0 or newer with
-> views enabled (buffa-types 0.9+ for the well-known types): the service
-> stubs rely on the `HasMessageView` impls and owned-view wrappers that
-> buffa generates alongside each message, just as they rely on the JSON
-> serialization impls.
+> The underlying option is `extern_path=.=crate::proto`. `buffa_module=X` sets the path for all packages. Each referenced module must contain message types generated with views enabled by Buffa revision `104716922c66e21cf26895a2a5a2a42e6292f9d4`. Use `buffa-types` from that revision for well-known types. The service stubs require the generated `HasMessageView` and `ViewLifetimeParametric` implementations, owned-view wrappers, and JSON serialization implementations when JSON is enabled.
 
 #### Option B - `build.rs` (generated at build time)
 
@@ -175,7 +124,7 @@ assembled via a single `include!`. No plugin binaries required at build time.
 
 ```toml
 [build-dependencies]
-connectrpc-build = "0.9"
+connectrpc-build = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits" }
 ```
 
 ```rust
@@ -337,14 +286,14 @@ The core crate compiles for `wasm32-unknown-unknown`. Generated clients are gene
 
 ```toml
 [dependencies]
-connectrpc = { version = "0.9", default-features = false, features = ["gzip"] }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", default-features = false, features = ["gzip"] }
 ```
 
 ### Minimal build (no compression)
 
 ```toml
 [dependencies]
-connectrpc = { version = "0.9", default-features = false }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", default-features = false }
 ```
 
 ### Proto-only (no-JSON) builds
@@ -359,7 +308,7 @@ feature:
 [dependencies]
 # Note: `default-features = false` is the only way to drop `json`, so it also
 # drops the default compression features — re-list any you still want.
-connectrpc = { version = "0.9", default-features = false, features = ["server", "gzip", "zstd"] }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", default-features = false, features = ["server", "gzip", "zstd"] }
 ```
 
 With `json` off, message-type bounds relax from `Message + Serialize` to just
@@ -381,7 +330,7 @@ details.
 
 ```toml
 [dependencies]
-connectrpc = { version = "0.9", features = ["axum"] }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", features = ["axum"] }
 ```
 
 ## Generated Code Dependencies
@@ -390,9 +339,9 @@ Code generated by `protoc-gen-connect-rust` requires these dependencies:
 
 ```toml
 [dependencies]
-connectrpc = { version = "0.9", features = ["client"] }
-buffa = { version = "0.9", features = ["json"] }
-buffa-types = { version = "0.9", features = ["json"] }
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", features = ["client"] }
+buffa = { git = "https://github.com/anthropics/buffa", rev = "104716922c66e21cf26895a2a5a2a42e6292f9d4", features = ["json"] }
+buffa-types = { git = "https://github.com/anthropics/buffa", rev = "104716922c66e21cf26895a2a5a2a42e6292f9d4", features = ["json"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 ```
@@ -440,7 +389,7 @@ default = ["client"]
 client = ["connectrpc/client"]
 
 [dependencies]
-connectrpc = { version = "0.9", features = ["server"] }  # no "client"
+connectrpc = { git = "https://github.com/rapira-rs/connect-rust", branch = "fix/buffa-json-limits", features = ["server"] }  # no "client"
 ```
 
 `cargo build --no-default-features` now leaves out the `FooClient` items

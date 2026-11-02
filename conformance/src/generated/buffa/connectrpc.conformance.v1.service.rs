@@ -130,9 +130,9 @@ impl ::buffa::Message for UnaryResponseDefinition {
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.raw_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_response.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.raw_response.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -184,13 +184,13 @@ impl ::buffa::Message for UnaryResponseDefinition {
             );
             v.write_to(__cache, buf);
         }
-        if self.raw_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_response.as_option() {
             ::buffa::types::put_len_delimited_header(
                 5u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.raw_response.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if self.response_delay_ms != 0u32 {
             ::buffa::types::put_uint32_field(6u32, self.response_delay_ms, buf);
@@ -309,9 +309,9 @@ impl ::buffa::ExtensionSet for UnaryResponseDefinition {
     }
 }
 impl<'de> ::serde::Deserialize<'de> for UnaryResponseDefinition {
-    fn deserialize<D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize<__D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         struct _V;
         impl<'de> ::serde::de::Visitor<'de> for _V {
             type Value = UnaryResponseDefinition;
@@ -322,10 +322,10 @@ impl<'de> ::serde::Deserialize<'de> for UnaryResponseDefinition {
                 f.write_str("struct UnaryResponseDefinition")
             }
             #[allow(clippy::field_reassign_with_default)]
-            fn visit_map<A: ::serde::de::MapAccess<'de>>(
+            fn visit_map<__A: ::serde::de::MapAccess<'de>>(
                 self,
-                mut map: A,
-            ) -> ::core::result::Result<UnaryResponseDefinition, A::Error> {
+                mut map: __A,
+            ) -> ::core::result::Result<UnaryResponseDefinition, __A::Error> {
                 let mut __f_response_headers: ::core::option::Option<
                     ::buffa::alloc::vec::Vec<Header>,
                 > = None;
@@ -349,12 +349,12 @@ impl<'de> ::serde::Deserialize<'de> for UnaryResponseDefinition {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::vec::Vec<Header>;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::vec::Vec<Header>,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::null_as_default(d)
                                     }
@@ -367,12 +367,12 @@ impl<'de> ::serde::Deserialize<'de> for UnaryResponseDefinition {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::vec::Vec<Header>;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::vec::Vec<Header>,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::null_as_default(d)
                                     }
@@ -385,10 +385,10 @@ impl<'de> ::serde::Deserialize<'de> for UnaryResponseDefinition {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = u32;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
-                                    ) -> ::core::result::Result<u32, D::Error> {
+                                        d: __D,
+                                    ) -> ::core::result::Result<u32, __D::Error> {
                                         ::buffa::json_helpers::uint32::deserialize(d)
                                     }
                                 }
@@ -410,12 +410,12 @@ impl<'de> ::serde::Deserialize<'de> for UnaryResponseDefinition {
                             struct _DeserSeed;
                             impl<'de> ::serde::de::DeserializeSeed<'de> for _DeserSeed {
                                 type Value = ::buffa::alloc::vec::Vec<u8>;
-                                fn deserialize<D: ::serde::Deserializer<'de>>(
+                                fn deserialize<__D: ::serde::Deserializer<'de>>(
                                     self,
-                                    d: D,
+                                    d: __D,
                                 ) -> ::core::result::Result<
                                     ::buffa::alloc::vec::Vec<u8>,
-                                    D::Error,
+                                    __D::Error,
                                 > {
                                     ::buffa::json_helpers::bytes::deserialize(d)
                                 }
@@ -491,15 +491,15 @@ impl<'de> ::serde::Deserialize<'de> for UnaryResponseDefinition {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for UnaryResponseDefinition {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -651,9 +651,9 @@ impl ::buffa::Message for StreamResponseDefinition {
                 += 1u64
                     + ::buffa::types::uint32_encoded_len(self.response_delay_ms) as u64;
         }
-        if self.error.is_set() {
+        if let ::core::option::Option::Some(__v) = self.error.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.error.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -667,9 +667,9 @@ impl ::buffa::Message for StreamResponseDefinition {
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                     + inner_size as u64;
         }
-        if self.raw_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_response.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.raw_response.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -699,13 +699,13 @@ impl ::buffa::Message for StreamResponseDefinition {
         if self.response_delay_ms != 0u32 {
             ::buffa::types::put_uint32_field(3u32, self.response_delay_ms, buf);
         }
-        if self.error.is_set() {
+        if let ::core::option::Option::Some(__v) = self.error.as_option() {
             ::buffa::types::put_len_delimited_header(
                 4u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.error.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         for v in &self.response_trailers {
             ::buffa::types::put_len_delimited_header(
@@ -715,13 +715,13 @@ impl ::buffa::Message for StreamResponseDefinition {
             );
             v.write_to(__cache, buf);
         }
-        if self.raw_response.is_set() {
+        if let ::core::option::Option::Some(__v) = self.raw_response.as_option() {
             ::buffa::types::put_len_delimited_header(
                 6u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.raw_response.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -827,15 +827,15 @@ impl ::buffa::ExtensionSet for StreamResponseDefinition {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for StreamResponseDefinition {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -911,9 +911,9 @@ impl ::buffa::Message for UnaryRequest {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.response_definition.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -932,13 +932,13 @@ impl ::buffa::Message for UnaryRequest {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.response_definition.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if !self.request_data.is_empty() {
             ::buffa::types::put_shared_bytes_field(2u32, &self.request_data, buf);
@@ -997,15 +997,15 @@ impl ::buffa::ExtensionSet for UnaryRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for UnaryRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1067,9 +1067,9 @@ impl ::buffa::Message for UnaryResponse {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.payload.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1085,13 +1085,13 @@ impl ::buffa::Message for UnaryResponse {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.payload.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -1139,15 +1139,15 @@ impl ::buffa::ExtensionSet for UnaryResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for UnaryResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1223,9 +1223,9 @@ impl ::buffa::Message for IdempotentUnaryRequest {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.response_definition.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1244,13 +1244,13 @@ impl ::buffa::Message for IdempotentUnaryRequest {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.response_definition.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if !self.request_data.is_empty() {
             ::buffa::types::put_shared_bytes_field(2u32, &self.request_data, buf);
@@ -1309,15 +1309,15 @@ impl ::buffa::ExtensionSet for IdempotentUnaryRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for IdempotentUnaryRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1381,9 +1381,9 @@ impl ::buffa::Message for IdempotentUnaryResponse {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.payload.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1399,13 +1399,13 @@ impl ::buffa::Message for IdempotentUnaryResponse {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.payload.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -1453,15 +1453,15 @@ impl ::buffa::ExtensionSet for IdempotentUnaryResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for IdempotentUnaryResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1537,9 +1537,9 @@ impl ::buffa::Message for ServerStreamRequest {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.response_definition.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1558,13 +1558,13 @@ impl ::buffa::Message for ServerStreamRequest {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.response_definition.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if !self.request_data.is_empty() {
             ::buffa::types::put_shared_bytes_field(2u32, &self.request_data, buf);
@@ -1623,15 +1623,15 @@ impl ::buffa::ExtensionSet for ServerStreamRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ServerStreamRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1693,9 +1693,9 @@ impl ::buffa::Message for ServerStreamResponse {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.payload.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1711,13 +1711,13 @@ impl ::buffa::Message for ServerStreamResponse {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.payload.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -1765,15 +1765,15 @@ impl ::buffa::ExtensionSet for ServerStreamResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ServerStreamResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -1852,9 +1852,9 @@ impl ::buffa::Message for ClientStreamRequest {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.response_definition.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1873,13 +1873,13 @@ impl ::buffa::Message for ClientStreamRequest {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.response_definition.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if !self.request_data.is_empty() {
             ::buffa::types::put_shared_bytes_field(2u32, &self.request_data, buf);
@@ -1938,15 +1938,15 @@ impl ::buffa::ExtensionSet for ClientStreamRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ClientStreamRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2008,9 +2008,9 @@ impl ::buffa::Message for ClientStreamResponse {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.payload.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2026,13 +2026,13 @@ impl ::buffa::Message for ClientStreamResponse {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.payload.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -2080,15 +2080,15 @@ impl ::buffa::ExtensionSet for ClientStreamResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ClientStreamResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2189,9 +2189,9 @@ impl ::buffa::Message for BidiStreamRequest {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.response_definition.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2213,13 +2213,13 @@ impl ::buffa::Message for BidiStreamRequest {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.response_definition.is_set() {
+        if let ::core::option::Option::Some(__v) = self.response_definition.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.response_definition.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         if self.full_duplex {
             ::buffa::types::put_bool_field(2u32, self.full_duplex, buf);
@@ -2289,15 +2289,15 @@ impl ::buffa::ExtensionSet for BidiStreamRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for BidiStreamRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2359,9 +2359,9 @@ impl ::buffa::Message for BidiStreamResponse {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
         let mut size = 0u64;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.payload.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2377,13 +2377,13 @@ impl ::buffa::Message for BidiStreamResponse {
     ) {
         #[allow(unused_imports)]
         use ::buffa::Enumeration as _;
-        if self.payload.is_set() {
+        if let ::core::option::Option::Some(__v) = self.payload.as_option() {
             ::buffa::types::put_len_delimited_header(
                 1u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.payload.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -2431,15 +2431,15 @@ impl ::buffa::ExtensionSet for BidiStreamResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for BidiStreamResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2534,15 +2534,15 @@ impl ::buffa::ExtensionSet for UnimplementedRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for UnimplementedRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2637,15 +2637,15 @@ impl ::buffa::ExtensionSet for UnimplementedResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for UnimplementedResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2724,9 +2724,9 @@ impl ::buffa::Message for ConformancePayload {
         if !self.data.is_empty() {
             size += 1u64 + ::buffa::types::bytes_encoded_len(&self.data) as u64;
         }
-        if self.request_info.is_set() {
+        if let ::core::option::Option::Some(__v) = self.request_info.as_option() {
             let __slot = __cache.reserve();
-            let inner_size = self.request_info.compute_size(__cache);
+            let inner_size = __v.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2745,13 +2745,13 @@ impl ::buffa::Message for ConformancePayload {
         if !self.data.is_empty() {
             ::buffa::types::put_shared_bytes_field(1u32, &self.data, buf);
         }
-        if self.request_info.is_set() {
+        if let ::core::option::Option::Some(__v) = self.request_info.as_option() {
             ::buffa::types::put_len_delimited_header(
                 2u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.request_info.write_to(__cache, buf);
+            __v.write_to(__cache, buf);
         }
         self.__buffa_unknown_fields.write_to(buf);
     }
@@ -2807,15 +2807,15 @@ impl ::buffa::ExtensionSet for ConformancePayload {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for ConformancePayload {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -2955,9 +2955,10 @@ pub mod conformance_payload {
                     += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
                         + inner_size as u64;
             }
-            if self.connect_get_info.is_set() {
+            if let ::core::option::Option::Some(__v) = self.connect_get_info.as_option()
+            {
                 let __slot = __cache.reserve();
-                let inner_size = self.connect_get_info.compute_size(__cache);
+                let inner_size = __v.compute_size(__cache);
                 __cache.set(__slot, inner_size);
                 size
                     += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -2992,13 +2993,14 @@ pub mod conformance_payload {
                 );
                 v.write_to(__cache, buf);
             }
-            if self.connect_get_info.is_set() {
+            if let ::core::option::Option::Some(__v) = self.connect_get_info.as_option()
+            {
                 ::buffa::types::put_len_delimited_header(
                     4u32,
                     u64::from(__cache.consume_next()),
                     buf,
                 );
-                self.connect_get_info.write_to(__cache, buf);
+                __v.write_to(__cache, buf);
             }
             self.__buffa_unknown_fields.write_to(buf);
         }
@@ -3082,15 +3084,15 @@ pub mod conformance_payload {
         }
     }
     impl ::buffa::json_helpers::ProtoElemJson for RequestInfo {
-        fn serialize_proto_json<S: ::serde::Serializer>(
+        fn serialize_proto_json<__S: ::serde::Serializer>(
             v: &Self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             ::serde::Serialize::serialize(v, s)
         }
-        fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             <Self as ::serde::Deserialize>::deserialize(d)
         }
     }
@@ -3226,15 +3228,15 @@ pub mod conformance_payload {
         }
     }
     impl ::buffa::json_helpers::ProtoElemJson for ConnectGetInfo {
-        fn serialize_proto_json<S: ::serde::Serializer>(
+        fn serialize_proto_json<__S: ::serde::Serializer>(
             v: &Self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             ::serde::Serialize::serialize(v, s)
         }
-        fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             <Self as ::serde::Deserialize>::deserialize(d)
         }
     }
@@ -3313,7 +3315,7 @@ impl Error {
     ///Sets [`Self::message`] to `Some(value)`, consuming and returning `self`.
     pub fn with_message(
         mut self,
-        value: impl Into<::buffa::alloc::string::String>,
+        value: impl ::core::convert::Into<::buffa::alloc::string::String>,
     ) -> Self {
         self.message = Some(value.into());
         self
@@ -3449,15 +3451,15 @@ impl ::buffa::ExtensionSet for Error {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for Error {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -3608,15 +3610,15 @@ impl ::buffa::ExtensionSet for Header {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for Header {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -3970,9 +3972,9 @@ impl ::buffa::ExtensionSet for RawHTTPRequest {
     }
 }
 impl<'de> ::serde::Deserialize<'de> for RawHTTPRequest {
-    fn deserialize<D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize<__D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         struct _V;
         impl<'de> ::serde::de::Visitor<'de> for _V {
             type Value = RawHTTPRequest;
@@ -3983,10 +3985,10 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPRequest {
                 f.write_str("struct RawHTTPRequest")
             }
             #[allow(clippy::field_reassign_with_default)]
-            fn visit_map<A: ::serde::de::MapAccess<'de>>(
+            fn visit_map<__A: ::serde::de::MapAccess<'de>>(
                 self,
-                mut map: A,
-            ) -> ::core::result::Result<RawHTTPRequest, A::Error> {
+                mut map: __A,
+            ) -> ::core::result::Result<RawHTTPRequest, __A::Error> {
                 let mut __f_verb: ::core::option::Option<
                     ::buffa::alloc::string::String,
                 > = None;
@@ -4012,12 +4014,12 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPRequest {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::string::String;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::string::String,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::proto_string::deserialize(d)
                                     }
@@ -4030,12 +4032,12 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPRequest {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::string::String;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::string::String,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::proto_string::deserialize(d)
                                     }
@@ -4048,12 +4050,12 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPRequest {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::vec::Vec<Header>;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::vec::Vec<Header>,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::null_as_default(d)
                                     }
@@ -4066,12 +4068,12 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPRequest {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::vec::Vec<Header>;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::vec::Vec<Header>,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::null_as_default(d)
                                     }
@@ -4086,14 +4088,14 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPRequest {
                                     type Value = ::buffa::alloc::vec::Vec<
                                         raw_http_request::EncodedQueryParam,
                                     >;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::vec::Vec<
                                             raw_http_request::EncodedQueryParam,
                                         >,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::null_as_default(d)
                                     }
@@ -4178,15 +4180,15 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPRequest {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for RawHTTPRequest {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -4278,9 +4280,9 @@ pub mod raw_http_request {
             if !self.name.is_empty() {
                 size += 1u64 + ::buffa::types::string_encoded_len(&self.name) as u64;
             }
-            if self.value.is_set() {
+            if let ::core::option::Option::Some(__v) = self.value.as_option() {
                 let __slot = __cache.reserve();
-                let inner_size = self.value.compute_size(__cache);
+                let inner_size = __v.compute_size(__cache);
                 __cache.set(__slot, inner_size);
                 size
                     += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -4302,13 +4304,13 @@ pub mod raw_http_request {
             if !self.name.is_empty() {
                 ::buffa::types::put_string_field(1u32, &self.name, buf);
             }
-            if self.value.is_set() {
+            if let ::core::option::Option::Some(__v) = self.value.as_option() {
                 ::buffa::types::put_len_delimited_header(
                     2u32,
                     u64::from(__cache.consume_next()),
                     buf,
                 );
-                self.value.write_to(__cache, buf);
+                __v.write_to(__cache, buf);
             }
             if self.base64_encode {
                 ::buffa::types::put_bool_field(3u32, self.base64_encode, buf);
@@ -4375,15 +4377,15 @@ pub mod raw_http_request {
         }
     }
     impl ::buffa::json_helpers::ProtoElemJson for EncodedQueryParam {
-        fn serialize_proto_json<S: ::serde::Serializer>(
+        fn serialize_proto_json<__S: ::serde::Serializer>(
             v: &Self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             ::serde::Serialize::serialize(v, s)
         }
-        fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             <Self as ::serde::Deserialize>::deserialize(d)
         }
     }
@@ -4606,9 +4608,9 @@ impl ::buffa::ExtensionSet for MessageContents {
     }
 }
 impl<'de> ::serde::Deserialize<'de> for MessageContents {
-    fn deserialize<D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize<__D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         struct _V;
         impl<'de> ::serde::de::Visitor<'de> for _V {
             type Value = MessageContents;
@@ -4619,10 +4621,10 @@ impl<'de> ::serde::Deserialize<'de> for MessageContents {
                 f.write_str("struct MessageContents")
             }
             #[allow(clippy::field_reassign_with_default)]
-            fn visit_map<A: ::serde::de::MapAccess<'de>>(
+            fn visit_map<__A: ::serde::de::MapAccess<'de>>(
                 self,
-                mut map: A,
-            ) -> ::core::result::Result<MessageContents, A::Error> {
+                mut map: __A,
+            ) -> ::core::result::Result<MessageContents, __A::Error> {
                 let mut __f_compression: ::core::option::Option<
                     ::buffa::EnumValue<Compression>,
                 > = None;
@@ -4636,12 +4638,12 @@ impl<'de> ::serde::Deserialize<'de> for MessageContents {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::EnumValue<Compression>;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::EnumValue<Compression>,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::proto_enum::deserialize(d)
                                     }
@@ -4653,12 +4655,12 @@ impl<'de> ::serde::Deserialize<'de> for MessageContents {
                             struct _DeserSeed;
                             impl<'de> ::serde::de::DeserializeSeed<'de> for _DeserSeed {
                                 type Value = ::buffa::alloc::vec::Vec<u8>;
-                                fn deserialize<D: ::serde::Deserializer<'de>>(
+                                fn deserialize<__D: ::serde::Deserializer<'de>>(
                                     self,
-                                    d: D,
+                                    d: __D,
                                 ) -> ::core::result::Result<
                                     ::buffa::alloc::vec::Vec<u8>,
-                                    D::Error,
+                                    __D::Error,
                                 > {
                                     ::buffa::json_helpers::bytes::deserialize(d)
                                 }
@@ -4749,15 +4751,15 @@ impl<'de> ::serde::Deserialize<'de> for MessageContents {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for MessageContents {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -4899,15 +4901,15 @@ impl ::buffa::ExtensionSet for StreamContents {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for StreamContents {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
@@ -5007,9 +5009,9 @@ pub mod stream_contents {
             if let Some(v) = self.length {
                 size += 1u64 + ::buffa::types::uint32_encoded_len(v) as u64;
             }
-            if self.payload.is_set() {
+            if let ::core::option::Option::Some(__v) = self.payload.as_option() {
                 let __slot = __cache.reserve();
-                let inner_size = self.payload.compute_size(__cache);
+                let inner_size = __v.compute_size(__cache);
                 __cache.set(__slot, inner_size);
                 size
                     += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -5031,13 +5033,13 @@ pub mod stream_contents {
             if let Some(v) = self.length {
                 ::buffa::types::put_uint32_field(2u32, v, buf);
             }
-            if self.payload.is_set() {
+            if let ::core::option::Option::Some(__v) = self.payload.as_option() {
                 ::buffa::types::put_len_delimited_header(
                     3u32,
                     u64::from(__cache.consume_next()),
                     buf,
                 );
-                self.payload.write_to(__cache, buf);
+                __v.write_to(__cache, buf);
             }
             self.__buffa_unknown_fields.write_to(buf);
         }
@@ -5103,15 +5105,15 @@ pub mod stream_contents {
         }
     }
     impl ::buffa::json_helpers::ProtoElemJson for StreamItem {
-        fn serialize_proto_json<S: ::serde::Serializer>(
+        fn serialize_proto_json<__S: ::serde::Serializer>(
             v: &Self,
-            s: S,
-        ) -> ::core::result::Result<S::Ok, S::Error> {
+            s: __S,
+        ) -> ::core::result::Result<__S::Ok, __S::Error> {
             ::serde::Serialize::serialize(v, s)
         }
-        fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-            d: D,
-        ) -> ::core::result::Result<Self, D::Error> {
+        fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+            d: __D,
+        ) -> ::core::result::Result<Self, __D::Error> {
             <Self as ::serde::Deserialize>::deserialize(d)
         }
     }
@@ -5402,9 +5404,9 @@ impl ::buffa::ExtensionSet for RawHTTPResponse {
     }
 }
 impl<'de> ::serde::Deserialize<'de> for RawHTTPResponse {
-    fn deserialize<D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize<__D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         struct _V;
         impl<'de> ::serde::de::Visitor<'de> for _V {
             type Value = RawHTTPResponse;
@@ -5415,10 +5417,10 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPResponse {
                 f.write_str("struct RawHTTPResponse")
             }
             #[allow(clippy::field_reassign_with_default)]
-            fn visit_map<A: ::serde::de::MapAccess<'de>>(
+            fn visit_map<__A: ::serde::de::MapAccess<'de>>(
                 self,
-                mut map: A,
-            ) -> ::core::result::Result<RawHTTPResponse, A::Error> {
+                mut map: __A,
+            ) -> ::core::result::Result<RawHTTPResponse, __A::Error> {
                 let mut __f_status_code: ::core::option::Option<u32> = None;
                 let mut __f_headers: ::core::option::Option<
                     ::buffa::alloc::vec::Vec<Header>,
@@ -5436,10 +5438,10 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPResponse {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = u32;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
-                                    ) -> ::core::result::Result<u32, D::Error> {
+                                        d: __D,
+                                    ) -> ::core::result::Result<u32, __D::Error> {
                                         ::buffa::json_helpers::uint32::deserialize(d)
                                     }
                                 }
@@ -5451,12 +5453,12 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPResponse {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::vec::Vec<Header>;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::vec::Vec<Header>,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::null_as_default(d)
                                     }
@@ -5469,12 +5471,12 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPResponse {
                                 struct _S;
                                 impl<'de> ::serde::de::DeserializeSeed<'de> for _S {
                                     type Value = ::buffa::alloc::vec::Vec<Header>;
-                                    fn deserialize<D: ::serde::Deserializer<'de>>(
+                                    fn deserialize<__D: ::serde::Deserializer<'de>>(
                                         self,
-                                        d: D,
+                                        d: __D,
                                     ) -> ::core::result::Result<
                                         ::buffa::alloc::vec::Vec<Header>,
-                                        D::Error,
+                                        __D::Error,
                                     > {
                                         ::buffa::json_helpers::null_as_default(d)
                                     }
@@ -5553,15 +5555,15 @@ impl<'de> ::serde::Deserialize<'de> for RawHTTPResponse {
     }
 }
 impl ::buffa::json_helpers::ProtoElemJson for RawHTTPResponse {
-    fn serialize_proto_json<S: ::serde::Serializer>(
+    fn serialize_proto_json<__S: ::serde::Serializer>(
         v: &Self,
-        s: S,
-    ) -> ::core::result::Result<S::Ok, S::Error> {
+        s: __S,
+    ) -> ::core::result::Result<__S::Ok, __S::Error> {
         ::serde::Serialize::serialize(v, s)
     }
-    fn deserialize_proto_json<'de, D: ::serde::Deserializer<'de>>(
-        d: D,
-    ) -> ::core::result::Result<Self, D::Error> {
+    fn deserialize_proto_json<'de, __D: ::serde::Deserializer<'de>>(
+        d: __D,
+    ) -> ::core::result::Result<Self, __D::Error> {
         <Self as ::serde::Deserialize>::deserialize(d)
     }
 }
