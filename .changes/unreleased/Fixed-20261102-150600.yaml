@@ -1,0 +1,4 @@
+kind: Fixed
+body: |-
+    Update Zstandard dependencies to versions that correct the reported memory safety errors.
+time: 2026-11-02T15:06:00.000000000+00:00
